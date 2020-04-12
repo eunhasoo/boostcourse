@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+}
+
+.container {
+  margin: 20px 40px;
+}
+
+body, .container {
+  background-color: rgb(42, 140, 165);
+}
+
+nav {
+  padding: 5px;
+  height: 100px;
+}
+
+ul {
+  text-align: center;
+  list-style: none;
+  float: right;
+}
+
+ul a {
+  text-decoration: none;
+  color: white;
+}
+
+header, footer {
+  height: 100px;
+}
+
+header, article, footer {
+  margin-bottom: 8px;
+}
+
+header, article, footer {
+  background-color: #f5f5f5;
+}
+
+nav ul li{
+  color: white;
+  display: inline-block;
+  margin-right: 10px;
+  width: 120px;
+  padding: 5px;
+  background-color: #437fa1;
+  box-shadow: 1px 1px 1px 1px #aaaaaa;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+article {
+  clear: both;
+  padding: 2px 80px;
+  text-align: left;
+}
+
+article h2 {
+  margin: 2px 0;
+}
+
+article p {
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.part {
+  height: 200px;
+  margin: 30px 0;
+}
+
+.part > img {
+  margin-right: 30px;
+  width: 200px;
+  height: 100%;
+  border: 3px solid gray;
+}
+
+footer p {
+  text-align: center;
+  padding-top: 25px;
+  color: rgb(42, 140, 165);
+}
+
+button {
+  margin: 30px 5px;
+  color: white;
+  font-size: 20px;
+  border: none;
+  width: 100px;
+  height: 100px;
+  background-color: #3c81af;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px 1px #393391b4;
+}
+
+button:hover {
+  color: #ffee00;
+}
