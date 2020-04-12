@@ -20,4 +20,4 @@ local.properties
 .classpath
 .settings/
 .loadpath
-*/META-INF/*
+*/WebContent/META-INF/MANIFEST.MF
