@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.container {
+    width: 500px;
+    margin: 50px auto;
+}
+
+p {
+    font-size: 1.5em;
+}
+
+input[type=text] {
+    width: 80%;
+    padding: 12px 20px;
+    font-size: 1em;
+}
+
+label {
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+section {
+    margin-top: 50px;
+}
+
+button {
+    font-size: 1em;
+    border: 1px solid #b6b6b6;
+    width: 120px;
+    height: 50px;
+    color: white;
+    background-color: #5abaf1;
+}
+
+#back {
+    margin-right: 80px;
+    color: black;
+    background-color: white;
+}
