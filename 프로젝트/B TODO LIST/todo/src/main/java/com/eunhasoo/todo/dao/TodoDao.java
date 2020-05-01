@@ -11,7 +11,7 @@ import com.eunhasoo.todo.dto.TodoDto;
 
 public class TodoDao {
 
-	private final String dbUrl = "jdbc:mysql://localhost:3306/connectdb";
+	private final String dbUrl = "jdbc:mysql://localhost:3306/connectdb?serverTimezone=Asia/Seoul";
 	private final String dbUser = "connectuser";
 	private final String dbPasswd = "connect123!@#";
 

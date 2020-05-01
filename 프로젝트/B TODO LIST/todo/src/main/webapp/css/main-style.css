@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+header {
+  height: 40px;
+}
+
+.container {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+#worktodo {
+  margin: 0px;
+  margin-top: 50px;
+  top: 60px;
+  float: left;
+  font-size: 2em;
+  transform: rotate(-30deg);
+}
+
+.todoadd {
+  position: absolute;
+  top: 50px;
+  right: 35px;
+  background-color: #20adee;
+  color: white;
+  padding: 20px 20px;
+}
+
+.part {
+  margin-left: 90px;
+  width: 100%;
+}
+
+section {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  margin: 0px 5px;
+}
+
+.type {
+  width: 100%;
+  height: 70px;
+  background-color: #345461;
+}
+
+.type p {
+  margin-left: 10px;
+  color: white;
+  text-align: left;
+  line-height: 70px;
+  font-size: 1.5em;
+}
+
+.card {
+  width: 100%;
+  height: 120px;
+  background-color: #cee5ef;
+  margin: 10px 0px;
+  line-height: 60px;
+}
+
+.card > p, h3 {
+	padding: 0px;
+	margin: 0px;
+	margin-left: 15px;
+}
+
+h3 {
+	font-size : 1.3em;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.next {	
+	margin-left: 3px;
+	padding:4px 5px;
+	background-color:white;
+	border: 1px solid gray;
+	cursor: pointer;
+}
