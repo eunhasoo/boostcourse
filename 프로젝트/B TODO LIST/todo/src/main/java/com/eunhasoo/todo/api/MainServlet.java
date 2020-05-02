@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.eunhasoo.todo.dao.TodoDao;
 import com.eunhasoo.todo.dto.TodoDto;
 
-@WebServlet("/")
+@WebServlet("/main")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

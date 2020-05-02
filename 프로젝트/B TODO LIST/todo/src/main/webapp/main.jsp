@@ -5,14 +5,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/main-style.css">
+    <link type="text/css" href="./css/main-style.css" rel="stylesheet">
     <title>TODO LIST</title>
 </head>
 <body>
 	<p id="worktodo">나의 해야 할 일들</p>
+	<div style="clear:both;"></div>
+	
 	<div class="container">
 	    <a href="todoform" class="todoadd">새로운 TODO 등록</a>
-	    <div style="clear:both;"></div>
 	    <div class="part">
 	        <section>
 	            <div class="type"><p>TODO</p></div>
@@ -57,5 +58,5 @@
     	</div> <!-- part 끝 -->
     </div> <!-- container 끝 -->
 </body>
-<script src="js/main.js"></script>
+<script src="./js/main.js"></script>
 </html>

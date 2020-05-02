@@ -22,10 +22,8 @@ public class TodoTypeServlet extends HttpServlet {
 		Long id = Long.parseLong(request.getParameter("id"));
 		String type = request.getParameter("type");
 		TodoDto todoDto = new TodoDto(id, type);
-		System.out.println(id +" "+ type);
 		TodoDao todoDao = new TodoDao();
-		int result = todoDao.updateTodo(todoDto);
-		System.out.println(result);
+		todoDao.updateTodo(todoDto);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
