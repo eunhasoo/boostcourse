@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+<h1>Book Cafe</h1>
+<ul class="container">
+</ul>
+  
+<script id="data-template" type="text/template">
+  <li>
+    <p>{id}. {title}, {name}</p>
+  </li>
+</script>
+
+<script>
+var obj = [
+  {
+    id: 1,
+    title: "헨젤과 그레텔",
+    name: "수잔"
+  },
+  {
+    id: 2,
+    title: "백설공주",
+    name: "제니퍼"
+  },
+  {
+    id: 3,
+    title: "잭과 콩나무",
+    name: "마이크"
+  }  
+];
+
+var container = document.querySelector('.container');
+var tmp = document.querySelector('#data-template').innerHTML;
+var result = "";
+obj.forEach((o) => {
+  result += tmp.replace('{id}', o.id)
+                .replace('{title}', o.title)
+                .replace('{name}', o.name)
+});
+container.innerHTML = result;
+</script>
+</body>
+</html>

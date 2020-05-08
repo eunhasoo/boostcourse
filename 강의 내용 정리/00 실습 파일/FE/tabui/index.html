@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Tab UI Example</title>
+</head>
+<body>
+    <h1>Tab UI Example</h1>
+
+    <div class="tab">
+        <div class="tab-menu">
+            <div>진돌이</div>
+            <div>진순이</div>
+            <div>꽃돌이</div>
+            <div>꽃순이</div>
+            <div>순심이</div>
+        </div>
+        <section class="content">
+            <h3>ID 이름</h3>
+            <p>"자기소개"</p>
+        </section>
+    </div>
+
+    <script id="template" type="text/template">
+        <h3>{id}. {name}</h3>
+        <p>"{say}"</p>
+    </script>
+    <script src="index.js"></script>
+</body>
+</html>

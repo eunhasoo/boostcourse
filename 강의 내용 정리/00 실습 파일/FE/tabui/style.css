@@ -1,0 +1,30 @@
+* {
+    text-align: center
+}
+
+h2, h4 {
+    margin: 0px;
+}
+
+.tab {
+    width: 600px;
+    margin: 0px auto;
+}
+
+.tab-menu {
+    background-color: bisque;
+}
+
+.tab-menu > div {
+    display: inline-block;
+    width: 116px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.content {
+    padding: 5%;
+    background-color: antiquewhite;
+}
