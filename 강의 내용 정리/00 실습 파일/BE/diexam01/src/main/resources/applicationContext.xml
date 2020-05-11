@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 가장 바깥쪽, root element -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Bean 등록 (디플트로 Singleton 패턴으로 등록)
+		 Bean으로 등록된 객체들은 모두 생성되어 메모리에 올려진다. -->
+	<bean id="userBean" class="com.eunhasoo.diexam01.UserBean"></bean>
+	<!-- UserBean userBean = new UserBean(); 와 동일 -->
+	
+	<bean id="engine" class="com.eunhasoo.diexam01.Engine"></bean>
+	<bean id="car" class="com.eunhasoo.diexam01.Car">
+		<property name="engine" ref="engine"></property>
+	</bean>
+	
+</beans>
