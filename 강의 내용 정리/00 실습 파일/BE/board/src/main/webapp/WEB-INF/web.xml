@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+
+	<display-name>Spring JavaConfig Sample</display-name>
+	<context-param>
+		<!-- contextClass는 해당 ApplicationContext를 이용함 -->
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+		</param-value>
+	</context-param>
+	<context-param>
+		<!-- Context가 로딩될때 실행되는 리스너가 해당 설정파일을 읽어들임 -->
+		<param-name>contextConfigLocation</param-name>
+		<param-value>com.eunhasoo.board.config.ApplicationConfig
+		</param-value>
+	</context-param>
+	<listener> <!-- 특정 이벤트가 일어났을 때 동작: 컨텍스트가 로딩되면 해당 클래스를 로딩 -->
+		<listener-class>org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>mvc</servlet-name> <!-- DispatcherServlet을 Front Controller로 설정 -->
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextClass</param-name> <!-- ApplicationContext로 이용할 것임을 명시 -->
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name> <!-- 실행될 때 해당하는 경로의 클래스를 -->
+			<param-value>com.eunhasoo.board.config.WebMvcContextConfiguration
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 요청이 수행되기 전, 응답이 전송되기 전 수행되는 파트 -->
+	<filter>
+		<!-- 한글 인코딩 처리 (param-value 부분만 변경해서 지정) -->
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern> <!-- 모든 요청에 적용하기 위해 /*로 지정 -->
+	</filter-mapping>
+</web-app>

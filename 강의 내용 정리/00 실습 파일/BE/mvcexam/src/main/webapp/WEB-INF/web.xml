@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+  <display-name>Spring JavaConfig Sample</display-name>
+  <servlet>
+    <servlet-name>mvc</servlet-name> <!-- DispatcherServlet을 FrontController로써 실행 -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextClass</param-name> <!-- IoC 컨테이너로 사용할 클래스 -->
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name> <!-- 설정을 읽어들임 -->
+      <param-value>com.eunhasoo.mvcexam.config.WebMvcContextConfiguration</param-value> <!--  패키지명 필수! -->
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mvc</servlet-name>
+    <url-pattern>/</url-pattern> <!-- 모든 요청이 들어오면 mvc 이름의 서블릿을 실행 -->
+  </servlet-mapping>
+</web-app>
