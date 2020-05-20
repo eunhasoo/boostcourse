@@ -1,8 +1,8 @@
-package com.eunhasoo.reservation.domain;
+package com.eunhasoo.reservation.dto;
 
 import java.sql.Date;
 
-public class Product {
+public class ProductDto {
 
 	private int id;
 	private int categoryId;
@@ -12,7 +12,7 @@ public class Product {
 	private Date createDate;
 	private Date modifyDate;
 
-	public Product(int id, int categoryId, String description, String content, String event, Date createDate,
+	public ProductDto(int id, int categoryId, String description, String content, String event, Date createDate,
 			Date modifyDate) {
 		super();
 		this.id = id;

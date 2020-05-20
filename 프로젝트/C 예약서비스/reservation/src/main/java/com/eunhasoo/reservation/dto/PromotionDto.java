@@ -1,6 +1,6 @@
-package com.eunhasoo.reservation.domain;
+package com.eunhasoo.reservation.dto;
 
-public class Promotion {
+public class PromotionDto {
 
 	private Integer id;
 	private Integer productId;
