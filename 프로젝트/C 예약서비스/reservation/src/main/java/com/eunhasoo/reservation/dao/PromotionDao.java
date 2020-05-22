@@ -17,7 +17,7 @@ public class PromotionDao {
 			+ "inner join product_image i on p.product_id = i.product_id "
 			+ "inner join file_info f on i.file_id = f.id " + "where i.type = \"th\"";
 
-	JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
 	public PromotionDao(DataSource dataSource) {

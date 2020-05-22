@@ -17,9 +17,9 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
-        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
-        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
+        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/resources/css/").setCachePeriod(31556926);
+        registry.addResourceHandler("/img/**").addResourceLocations("/WEB-INF/resources/img/").setCachePeriod(31556926);
+        registry.addResourceHandler("/script/**").addResourceLocations("/WEB-INF/resources/script/").setCachePeriod(31556926);
     }
  
     // default servlet handler를 사용하게 합니다.
@@ -31,7 +31,7 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(final ViewControllerRegistry registry) {
     	System.out.println("addViewControllers가 호출됩니다.");
-        registry.addViewController("/").setViewName("index");
+        registry.addViewController("/").setViewName("main");
     }
     
     @Bean
