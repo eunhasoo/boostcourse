@@ -14,30 +14,16 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 @Configuration // 설정 클래스 임을 명시
 @EnableTransactionManagement // 트랜잭션 관련 설정을 자동으로 처리해줌
-@PropertySource("classpath:application.properties") // application.properties에서 정의한 값을 사용할 것임
 public class DBConfig implements TransactionManagementConfigurer {
-	
-	// application.properties에서 정의한 값 주입
-	@Value("${driver-class-name}")
-	String driverClassName;
-	
-	@Value("${url}")
-	String url;
-	
-	@Value("${username}")
-	String username;
-	
-	@Value("${password}")
-	String password;
-	
+
 	// 데이터 소스 빈 등록 (데이터베이스 이용)
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(DBInfo.driverClassName);
+		dataSource.setUrl(DBInfo.url);
+		dataSource.setUsername(DBInfo.username);
+		dataSource.setPassword(DBInfo.password);
 		return dataSource;
 	}
 

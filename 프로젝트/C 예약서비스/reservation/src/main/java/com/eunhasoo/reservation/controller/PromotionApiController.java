@@ -8,20 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eunhasoo.reservation.dto.CategoryListDto;
-import com.eunhasoo.reservation.service.CategoryService;
+import com.eunhasoo.reservation.dto.PromotionDto;
+import com.eunhasoo.reservation.service.PromotionService;
 
 @RestController
-public class CategoryApiController {
+public class PromotionApiController {
 
 	@Autowired
-	CategoryService categoryService;
+	PromotionService promotionService;
 	
-	@GetMapping("/api/categories")
-	public Map<String, Object> categories() {
-		List<CategoryListDto> categories = categoryService.getCategories();
+	@GetMapping("/api/promotions")
+	public Map<String, Object> promotions() {
+		List<PromotionDto> promotions = promotionService.getPromotions();
 		Map<String, Object> map = new HashMap<>();
-		map.put("items", categories);
+		map.put("items", promotions);
 		return map;
 	}
+	
 }

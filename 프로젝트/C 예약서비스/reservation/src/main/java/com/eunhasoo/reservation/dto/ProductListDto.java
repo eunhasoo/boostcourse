@@ -3,19 +3,19 @@ package com.eunhasoo.reservation.dto;
 public class ProductListDto {
 	
 	private int displayInfoId;
+	private int productId;
+	private String productDescription;
 	private String placeName;
 	private String productContent;
-	private String productDescription;
-	private int productId;
 	private String productImageUrl;
 	
-	public ProductListDto(int displayInfoId, String placeName, String productContent, String productDescription,
-			int productId, String productImageUrl) {
+	public ProductListDto(int displayInfoId, int productId, String productDescription, String placeName,
+			String productContent, String productImageUrl) {
 		this.displayInfoId = displayInfoId;
+		this.productId = productId;
+		this.productDescription = productDescription;
 		this.placeName = placeName;
 		this.productContent = productContent;
-		this.productDescription = productDescription;
-		this.productId = productId;
 		this.productImageUrl = productImageUrl;
 	}
 
@@ -25,6 +25,22 @@ public class ProductListDto {
 
 	public void setDisplayInfoId(int displayInfoId) {
 		this.displayInfoId = displayInfoId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	public String getProductDescription() {
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 
 	public String getPlaceName() {
@@ -41,22 +57,6 @@ public class ProductListDto {
 
 	public void setProductContent(String productContent) {
 		this.productContent = productContent;
-	}
-
-	public String getProductDescription() {
-		return productDescription;
-	}
-
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
-	}
-
-	public int getProductId() {
-		return productId;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
 	}
 
 	public String getProductImageUrl() {
