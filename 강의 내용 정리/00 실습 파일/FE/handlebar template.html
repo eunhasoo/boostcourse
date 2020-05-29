@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        li {
+            padding: 10px;
+            margin: 3px;
+            border-top: 1px solid rgb(230, 211, 148);
+            list-style: none;
+        }
+        li:nth-child(1) {
+            border: none;
+        }
+        .show {
+            width: 500px;
+            margin: 30px auto;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+        body {
+            background: #faf9f9;
+        }
+    </style>
+    </head>
+<body>
+    <h1 style="text-align: center;">Template Handlebar Test</h1>
+
+    <section class="show">
+
+    </section>
+
+    <script type="myTemplate" id="listTemplate">
+        <li>
+         <div>게시자 : {{name}}</div>
+         <div class="content">{{content}}</div>
+        {{#likes like}}
+            {{like}}
+        {{/likes}}
+         <div class="comment">
+         <h3>댓글 목록</h3>
+            {{#if comment}}
+                {{#each comment}}
+                    <div>{{@index}}번째 댓글: {{this}}</div>
+                {{/each}}
+            {{else}}
+                <div>댓글이 아직 없습니다.</div>
+            {{/if}}
+         </div>
+      </li>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+    <script>
+        var data = [
+            {"id" : 88, "name" : "crong", "content" : "새로운글을 올렸어요", "like" : 15, "comment" : ["댓글이다", "잘했어요"]},
+            {"id" : 28, "name" : "hary", "content" : "전 오늘도 노래를 불렀어요", "like" : 0, "comment" : ["제발고만..","듣고싶네요 그노래"]},
+            {"id" : 23, "name" : "pororo", "content" : "크롱이 항상 말썽을 피워서 행복해~", "like" : 4, "comment" : []},
+            {"id" : 5, "name" : "pobi", "content" : "물고기를 한마리도 잡지 못하다니..", "like" : 5, "comment" : ["댓글이다", "멋진글이네요", "잘봤습니다"]}
+        ];
+        
+        function addLikeHelper(like) {
+            if (like == 0) {
+                return ""
+            } else if (like > 10) {
+                return "좋아요 <b>" + like + "개</b> 돌파!"
+            }
+            else {
+                return "좋아요 <b>" + like + "개</b>"
+            }
+        }
+
+        var template = document.querySelector('#listTemplate').innerText;
+        var bindTemplate = Handlebars.compile(template);
+        Handlebars.registerHelper("likes", addLikeHelper);
+        var bindHTML = data.reduce((prev, next) => {
+            return prev + bindTemplate(next);
+        }, "") // 템플릿에 바인딩
+        document.querySelector('.show').innerHTML = bindHTML; // HTML에 바인딩
+    </script>
+</body>
+</html>
