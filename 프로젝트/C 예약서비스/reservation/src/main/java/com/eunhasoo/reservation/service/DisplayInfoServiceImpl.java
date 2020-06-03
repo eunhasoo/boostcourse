@@ -40,11 +40,9 @@ public class DisplayInfoServiceImpl implements DisplayInfoService {
 	@Autowired
 	private UserCommentDao userCommentDao;
 	
-	// null exception 해주기!
-	
 	@Override
 	public DisplayInfoDto getDisplayInfoDto(int displayInfoId) {
-		double averageScore = userCommentDao.selectAvgScore(displayInfoId);
+		Double averageScore = userCommentDao.selectAvgScore(displayInfoId);
 		List<UserComment> comments = userCommentDao.selectUserComment(displayInfoId);
 		DisplayInfo displayInfo = displayInfoDao.selectDisplayInfo(displayInfoId);
 		DisplayInfoImage displayInfoImage = displayInfoImageDao.selectDisplayInfoImage(displayInfoId);
@@ -59,11 +57,10 @@ public class DisplayInfoServiceImpl implements DisplayInfoService {
 			comment.setUserCommentImage(userCommentImage);
 		}
 		
-		return new DisplayInfoDto(averageScore, comments,
-								displayInfo, displayInfoImage, 
-								productImages, productPrices
+		return new DisplayInfoDto(
+				(averageScore != null) ? averageScore : 0, comments, displayInfo, 
+				displayInfoImage, productImages, productPrices
 		);
 	}
-
 
 }

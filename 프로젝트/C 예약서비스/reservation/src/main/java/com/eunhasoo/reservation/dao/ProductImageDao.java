@@ -19,7 +19,7 @@ public class ProductImageDao {
 	private final String SELECT_BY_ID = "select p.product_id as productId, p.id as productImageId, p.type, f.id as fileInfoId, f.file_name, "
 			+ "f.save_file_name, f.content_type, f.delete_Flag, f.create_date, f.modify_date " + "from product_image p "
 			+ "inner join display_info d on p.product_id = d.product_id "
-			+ "inner join file_info f on p.file_id = f.id " + "where p.type = \"ma\" and d.id = :displayInfoId "
+			+ "inner join file_info f on p.file_id = f.id " + "where p.type in (\"ma\", \"et\") and d.id = :displayInfoId "
 			+ "LIMIT 2";
 
 	private NamedParameterJdbcTemplate jdbcTemplate;

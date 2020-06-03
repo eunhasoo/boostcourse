@@ -6,14 +6,14 @@ import java.util.List;
 // 여러 객체들을 모아서 보낼 하나의 객체
 public class DisplayInfoDto {
 
-	private double averageScore;
+	private Double averageScore;
 	private List<UserComment> comments;
 	private DisplayInfo displayInfo;
 	private DisplayInfoImage displayInfoImage;
 	private List<ProductImage> productImages;
 	private List<ProductPrice> productPrices;
 
-	public DisplayInfoDto(double averageScore, List<UserComment> comments, DisplayInfo displayInfo,
+	public DisplayInfoDto(Double averageScore, List<UserComment> comments, DisplayInfo displayInfo,
 			DisplayInfoImage displayInfoImage, List<ProductImage> productImage, List<ProductPrice> productPrice) {
 		super();
 		this.averageScore = averageScore;
@@ -24,11 +24,11 @@ public class DisplayInfoDto {
 		this.productPrices = productPrice;
 	}
 
-	public double getAverageScore() {
+	public Double getAverageScore() {
 		return averageScore;
 	}
 
-	public void setAverageScore(double averageScore) {
+	public void setAverageScore(Double averageScore) {
 		this.averageScore = averageScore;
 	}
 

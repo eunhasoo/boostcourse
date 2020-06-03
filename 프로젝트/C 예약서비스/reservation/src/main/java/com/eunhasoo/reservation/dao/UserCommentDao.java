@@ -51,13 +51,13 @@ public class UserCommentDao {
 
 	}
 
-	public double selectAvgScore(int displayInfoId) {
+	public Double selectAvgScore(int displayInfoId) {
 		Map<String, Object> param = new HashMap<>();
 		param.put("displayInfoId", displayInfoId);
 		try {
 			return jdbcTemplate.queryForObject(SELECT_SCORE, param, Double.class);
 		} catch (EmptyResultDataAccessException e) {
-			return 0;
+			return null;
 		}
 	}
 
