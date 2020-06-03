@@ -121,7 +121,7 @@
 
     <script type="rv-template" id="itemList">
         <li class="item">
-            <a href="detail.html?id={id}" class="item_book">
+            <a href="detail?id={id}" class="item_book">
                 <div class="item_preview">
                     <img alt="{productDescription}" class="img_thumb" src="resources/{productImageUrl}">
                     <span class="img_border"></span>
@@ -133,6 +133,7 @@
             </a>
         </li>
     </script>
+    <script src="resources/script/common.js"></script>
     <script src="resources/script/main.js"></script>
 </body>
 </html>
