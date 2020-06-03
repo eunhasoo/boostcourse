@@ -95,11 +95,6 @@ function toggleMore(isOff) {
 	}
 }
 
-function goToTop() {
-	document.body.scrollTop = 0;
-	document.documentElement.scrollTop = 0;
-}
-
 function showSlides() {
 	var request = new XMLHttpRequest();
 	request.open('GET', '/reservation/api/promotions');
@@ -122,7 +117,6 @@ function slideAnimate(maxLength) {
 	var ul = document.querySelector('.section_visual .visual_img');
 	var ulOffset = ul.offsetWidth;
 	var index = 0;
-	console.log(maxLength);
 	setInterval(function() {
 		index = (index + 1) % maxLength;
 		if (index == 0) {
@@ -137,7 +131,6 @@ function slideAnimate(maxLength) {
 function onLoad() {
 	getItems(0, 0);
 	showSlides();
-	document.querySelector('footer .gototop').addEventListener('click', goToTop);
 	document.querySelector('.more .btn').addEventListener('click', getMore);
 	document.querySelector('.section_event_tab').addEventListener('click', selectCategory);
 }
