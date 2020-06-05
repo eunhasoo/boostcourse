@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
     <title>네이버 예약</title>
     <link href="resources/css/style.css" rel="stylesheet">
+	<link rel="shortcut icon" href="resources/img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="resources/img/favicon.ico" type="image/x-icon">
     <script src="resources/script/jquery-3.5.1.min.js"></script>
     <style>
         .container_visual {
             height: 414px;
         }
-        .container_visual p {
-        	height: 10px;
-        	line-height: 200px;
-        	text-align: center;
-        	margin: 0px auto;
+        .group_visual .visual_txt_inn {
+			position: absolute;
+			top: 190px;
         }
     </style>
 </head>
@@ -54,38 +54,6 @@
                         <div>
                             <div class="container_visual" style="width: 414px;">
                                 <ul class="visual_img detail_swipe">
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="item" style="width: 414px;"> <img alt="" class="img_thumb" src=""> <span class="img_bg"></span>
-                                        <div class="visual_txt">
-                                            <div class="visual_txt_inn">
-                                                <h2 class="visual_txt_tit"> <span></span> </h2>
-                                                <p class="visual_txt_dsc"></p>
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="prev">
@@ -129,7 +97,7 @@
                             <h4 class="in_tit"> <i class="spr_book ico_evt"></i> <span>이벤트 정보</span> </h4>
                         </div>
                         <div class="event_info">
-                            <div class="in_dsc">[네이버예약 특별할인]<br>R석 50%, S석 60% 할인</div>
+                            <div class="in_dsc"></div>
                         </div>
                     </div>
                 </div>
@@ -156,10 +124,10 @@
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
                     <ul class="info_tab_lst">
                         <li class="item active _detail">
-                            <a href="#" class="anchor active"> <span>상세정보</span> </a>
+                            <a class="anchor active"> <span>상세정보</span> </a>
                         </li>
                         <li class="item _path">
-                            <a href="#" class="anchor"> <span>오시는길</span> </a>
+                            <a class="anchor"> <span>오시는길</span> </a>
                         </li>
                     </ul>
                     <!-- [D] 상세정보 외 다른 탭 선택 시 detail_area_wrap에 hide 추가 -->
@@ -191,33 +159,7 @@
                     <!-- [D] 오시는길 외 다른 탭 선택 시 detail_location에 hide 추가 -->
                     <div class="detail_location hide">
                         <div class="box_store_info no_topline">
-                            <a href="#" class="store_location" title="지도웹으로 연결">
-                                <img class="store_map img_thumb" alt="map" src="https://simg.pstatic.net/static.map/image?version=1.1&amp;crs=EPSG:4326&amp;baselayer=bl_vc_bg&amp;exception=xml&amp;scale=2&amp;caller=mw_smart_booking&amp;overlayers=ol_vc_an&amp;center=127.0011948,37.5717079&amp;markers=type,default2,127.0011948,37.5717079&amp;level=11&amp;w=340&amp;h=150">
-                                <span class="img_border"></span>
-                                <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
-                            </a>
-                            <h3 class="store_name">엔에이치엔티켓링크(주)</h3>
-                            <div class="store_info">
-                                <div class="store_addr_wrap">
-                                    <span class="fn fn-pin2"></span>
-                                    <p class="store_addr store_addr_bold">서울특별시 종로구 종로33길 15 </p>
-                                    <p class="store_addr">
-                                        <span class="addr_old">지번</span>
-                                        <span class="addr_old_detail">서울특별시 종로구 연지동 270 </span>
-                                    </p>
-                                    <p class="store_addr addr_detail">두산아트센터 연강홀</p>
-                                </div>
-                                <div class="lst_store_info_wrap">
-                                    <ul class="lst_store_info">
-                                        <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">전화번호</span> </span> <span class="item_rt"> <a href="tel:02-548-0597" class="store_tel">02-548-0597</a></span> </li>
-                                    </ul>
-                                </div>
-                            </div>
-							<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
-                            <div class="bottom_common_path column2">
-                                <a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
-								<a href="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
-                            </div>
+                            <!-- 공연장 정보 -->
                         </div>
                     </div>
                 </div>
@@ -235,6 +177,31 @@
     </footer>
     <div id="photoviwer"></div>
     
+    <script id="store-info" type="rv-template">
+		<a href="#" class="store_location" title="지도웹으로 연결">
+            <img class="store_map img_thumb" alt="map" src="resources/{saveFileName}">
+            <span class="img_border"></span>
+            <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
+        </a>
+        <h3 class="store_name">{productDescription}</h3>
+        <div class="store_info">
+           <div class="store_addr_wrap">
+             <span class="fn fn-pin2"></span>
+                <p class="store_addr store_addr_bold">{placeLot}</p>
+                    <p class="store_addr">
+                        <span class="addr_old">지번</span>
+                        <span class="addr_old_detail">{placeStreet}</span>
+                    </p>
+                <p class="store_addr addr_detail">{placeName}</p>
+            </div>
+          <div class="lst_store_info_wrap">
+            <ul class="lst_store_info">
+               <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">{telephone}</span> </span> <span class="item_rt"> <a href="tel:{telephone}" class="store_tel">{telephone}</a></span> </li>
+            </ul>
+          </div>
+        </div>
+	</script>
+    
     <script id="comment-list" type="rv-template">
 	    <li class="list_item">
 		    <div>
@@ -250,7 +217,23 @@
 		        </div>
 		    </div>
 		</li>
+		<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
+        <div class="bottom_common_path column2">
+         	<a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
+			<a href="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
+        </div>
     </script>
+    
+    <script id="image-list" type="rv-template">
+		<li class="item" style="width: 414px;"> <img alt="{fileName}" class="img_thumb" src="resources/{saveFileName}"> <span class="img_bg"></span>
+        	  <div class="visual_txt">
+        	       <div class="visual_txt_inn">
+        	            <h2 class="visual_txt_tit"> <span>{productDescription}</span> </h2>
+        	                   <p class="visual_txt_dsc"></p>
+         	      </div>
+       	  	  </div>
+   		 </li>
+	</script>
     <script src="resources/script/common.js"></script>
     <script src="resources/script/detail.js"></script>
 </body>
