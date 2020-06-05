@@ -105,7 +105,7 @@ function showSlides() {
 		var template = '';
 		for (var i = 0, len = promotionItems.length; i < len; i++) {
 			template = promotionTemplate.replace('{id}', promotionItems[i].id)
-									    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
+						    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
 			ul.innerHTML += template;
 		}
 		slideAnimate(promotionItems.length);
