@@ -105,7 +105,7 @@ function showSlides() {
 		var template = '';
 		for (var i = 0, len = promotionItems.length; i < len; i++) {
 			template = promotionTemplate.replace('{id}', promotionItems[i].id)
-						    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
+									    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
 			ul.innerHTML += template;
 		}
 		slideAnimate(promotionItems.length);
@@ -114,17 +114,26 @@ function showSlides() {
 }
 
 function slideAnimate(maxLength) {
+	var currentTranslate = [];
 	var ul = document.querySelector('.section_visual .visual_img');
-	var ulOffset = ul.offsetWidth;
-	var index = 0;
-	setInterval(function() {
-		index = (index + 1) % maxLength;
-		if (index == 0) {
-			ul.style.transition = 'all 0s';
-		} else {
-			ul.style.transition = "all 0.5s";
-		}
-		ul.style.transform = 'translateX(-' + (index * ulOffset) + 'px)';
+	var ulOffset = ul.offsetWidth; // 414
+	for (var i = 0; i < maxLength; i++) {
+		currentTranslate[i] = -ulOffset;
+	}
+	var startIndex = 0;
+	setInterval(() => {
+		startIndex++;
+		var outerIndex = (startIndex - 1) % (maxLength);
+        for(var i = 0; i < maxLength; i++) {
+            var img = ul.children[i];
+            img.style.opacity = '1';
+            img.style.transform = 'translate('+(currentTranslate[i] - ulOffset)+'px)';
+            currentTranslate[i] = currentTranslate[i] - ulOffset;
+        }
+        var outerImg = ul.children[outerIndex];
+        outerImg.style.transform = 'translate('+(currentTranslate[outerIndex]+ulOffset*(maxLength))+'px)';
+        outerImg.style.opacity = '0';
+        currentTranslate[outerIndex] = currentTranslate[outerIndex] + ulOffset * (maxLength);
 	}, 3000);
 }
 

@@ -1272,7 +1272,7 @@ button {
     cursor: pointer;
     -webkit-box-sizing: border-box;
     moz-box-sizing: border-box;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 .group_visual .visual_img {
@@ -1284,11 +1284,20 @@ button {
 }
 
 .group_visual .visual_img .item {
+	transform: translate(-414px);
     overflow: hidden;
     position: relative;
     display: inline-block;
     white-space: normal;
-    vertical-align: top
+    vertical-align: top;
+	-webkit-transition-duration: 1s;
+    -moz-transition-duration: 1s;
+    -o-transition-duration: 1s;
+    transition-duration: 1s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
 }
 
 .group_visual .visual_img .item .img_bg:before,.group_visual .visual_img .item .visual_txt {
@@ -1309,7 +1318,8 @@ button {
     background: linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(0,0,0,.3) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#00ffffff', endColorstr='#a6000000');
     -ms-filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#00ffffff', endColorstr='#a6000000');
-    zoom:1}
+    zoom:1
+}
 
 .group_visual .visual_img .item .img_bg:before {
     content: '';
@@ -2985,7 +2995,7 @@ button {
     overflow: hidden;
     position: relative;
     display: inline-block;
-    width: 84.4%;
+    width: 100%; /* 84.4 */
     height: 177px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -2995,6 +3005,7 @@ button {
 
 @media screen and (max-width: 320px) {
     .event .section_visual .group_visual .container_visual .visual_img .item {
+    	left: -141;
         height:177px
     }
 }
