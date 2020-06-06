@@ -105,7 +105,7 @@ function showSlides() {
 		var template = '';
 		for (var i = 0, len = promotionItems.length; i < len; i++) {
 			template = promotionTemplate.replace('{id}', promotionItems[i].id)
-									    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
+						    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
 			ul.innerHTML += template;
 		}
 		slideAnimate(promotionItems.length);
@@ -124,16 +124,16 @@ function slideAnimate(maxLength) {
 	setInterval(() => {
 		startIndex++;
 		var outerIndex = (startIndex - 1) % (maxLength);
-        for(var i = 0; i < maxLength; i++) {
-            var img = ul.children[i];
-            img.style.opacity = '1';
-            img.style.transform = 'translate('+(currentTranslate[i] - ulOffset)+'px)';
-            currentTranslate[i] = currentTranslate[i] - ulOffset;
-        }
-        var outerImg = ul.children[outerIndex];
-        outerImg.style.transform = 'translate('+(currentTranslate[outerIndex]+ulOffset*(maxLength))+'px)';
-        outerImg.style.opacity = '0';
-        currentTranslate[outerIndex] = currentTranslate[outerIndex] + ulOffset * (maxLength);
+		for(var i = 0; i < maxLength; i++) {
+			var img = ul.children[i];
+			img.style.opacity = '1';
+			img.style.transform = 'translate('+(currentTranslate[i] - ulOffset)+'px)';
+			currentTranslate[i] = currentTranslate[i] - ulOffset;
+		}
+		var outerImg = ul.children[outerIndex];
+		outerImg.style.transform = 'translate('+(currentTranslate[outerIndex]+ulOffset*(maxLength))+'px)';
+		outerImg.style.opacity = '0';
+		currentTranslate[outerIndex] = currentTranslate[outerIndex] + ulOffset * (maxLength);
 	}, 3000);
 }
 
