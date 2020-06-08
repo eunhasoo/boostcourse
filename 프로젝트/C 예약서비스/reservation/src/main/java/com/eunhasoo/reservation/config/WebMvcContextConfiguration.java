@@ -33,6 +33,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     	System.out.println("addViewControllers가 호출됩니다.");
         registry.addViewController("/").setViewName("main");
         registry.addViewController("/detail").setViewName("detail");
+        registry.addViewController("/review").setViewName("review");
+        registry.addViewController("/reserve").setViewName("reserve");
     }
     
     @Bean
