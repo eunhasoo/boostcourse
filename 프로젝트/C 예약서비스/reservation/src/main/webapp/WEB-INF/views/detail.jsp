@@ -10,6 +10,7 @@
     <link href="resources/css/style.css" rel="stylesheet">
 	<link rel="shortcut icon" href="resources/img/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="resources/img/favicon.ico" type="image/x-icon">
+    <script src="resources/script/handlebars.min-v4.7.6.js"></script>
     <script src="resources/script/jquery-3.5.1.min.js"></script>
     <style>
         .container_visual {
@@ -58,7 +59,7 @@
                             </div>
                             <div class="prev">
                                 <div class="prev_inn">
-                                    <a href="#" class="btn_prev" title="이전">
+                                    <a class="btn_prev" title="이전">
                                         <!-- [D] 첫 이미지 이면 off 클래스 추가 -->
                                         <i class="spr_book2 ico_arr6_lt off"></i>
                                     </a>
@@ -66,7 +67,7 @@
                             </div>
                             <div class="nxt">
                                 <div class="nxt_inn">
-                                    <a href="#" class="btn_nxt" title="다음">
+                                    <a class="btn_nxt" title="다음">
                                         <i class="spr_book2 ico_arr6_rt"></i>
                                     </a>
                                 </div>
@@ -108,9 +109,9 @@
                         <div class="short_review_area">
                             <div class="grade_area">
                                 <!-- [D] 별점 graph_value는 퍼센트 환산하여 width 값을 넣어줌 -->
-                                <span class="graph_mask"> <em class="graph_value" style="width: 84%;"></em> </span>
-                                <strong class="text_value"> <span>4.2</span> <em class="total">5.0</em> </strong>
-                                <span class="join_count"><em class="green">52건</em> 등록</span>
+                                <span class="graph_mask"> <em class="graph_value" style="width: 0%;"></em> </span>
+                                <strong class="text_value"> <span>0.0</span> <em class="total">5.0</em> </strong>
+                                <span class="join_count"><em class="green">0건</em> 등록</span>
                             </div>
                             <ul class="list_short_review">
                             	<!-- 예매자 한줄평 li 자리 -->
@@ -118,7 +119,7 @@
                         </div>
                         <p class="guide"> <i class="spr_book2 ico_bell"></i> <span>네이버 예약을 통해 실제 방문한 이용자가 남긴 평가입니다.</span> </p>
                     </div>
-                    <a class="btn_review_more" href="./review.html"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
+                    <a class="btn_review_more" href="/reservation/review"> <span>예매자 한줄평 더보기</span> <i class="fn fn-forward1"></i> </a>
                 </div>
                 <div class="section_info_tab">
                     <!-- [D] tab 선택 시 anchor에 active 추가 -->
@@ -199,29 +200,34 @@
                <li class="item"> <span class="item_lt"> <i class="fn fn-call2"></i> <span class="sr_only">{telephone}</span> </span> <span class="item_rt"> <a href="tel:{telephone}" class="store_tel">{telephone}</a></span> </li>
             </ul>
           </div>
-        </div>
-	</script>
-    
-    <script id="comment-list" type="rv-template">
-	    <li class="list_item">
-		    <div>
-		        <div class="review_area">
-		            <div class="thumb_area">
-		                <a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="http://naverbooking.phinf.naver.net/20170306_3/1488772023601A4195_JPEG/image.jpg?type=f300_300" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">1</span>
-			</div>
-		            <h4 class="resoc_name"></h4>
-		            <p class="review">{{ comment }}</p>
-		        </div>
-		        <div class="info_area">
-		            <div class="review_info"> <span class="grade">{{ score }}</span> <span class="name">dbfl****</span> <span class="date">2017.3.5. 방문</span> </div>
-		        </div>
-		    </div>
-		</li>
+        </div>		
 		<!-- [D] 모바일 브라우저에서 접근 시 column2 추가와 btn_navigation 요소 추가 -->
         <div class="bottom_common_path column2">
          	<a href="#" class="btn_path"> <i class="fn fn-path-find2"></i> <span>길찾기</span> </a>
 			<a href="#" class="btn_navigation before"> <i class="fn fn-navigation2"></i> <span>내비게이션</span> </a>
         </div>
+
+	</script>
+    
+    <script id="comment-list" type="rv-template">
+	    <li class="list_item">
+		    <div>
+				{{#if commentImage}}
+		        	<div class="review_area">
+		            	<div class="thumb_area">
+		                	<a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="resources/{{commentImage}}" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">{{commentImageCount}}</span>
+						</div>
+				{{else}}
+		        	<div class="review_area no_img">
+				{{/if}}
+		            <h4 class="resoc_name">{{productDescription}}</h4>
+		            <p class="review">{{comment}}</p>
+		        </div>
+		        <div class="info_area">
+		            <div class="review_info"> <span class="grade">{{score}}.0</span> <span class="name">{{id}}</span> <span class="date">{{date}} 방문</span> </div>
+		        </div>
+		    </div>
+		</li>
     </script>
     
     <script id="image-list" type="rv-template">

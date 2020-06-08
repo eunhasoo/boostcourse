@@ -23,13 +23,14 @@ var app = {
 		this.setProductContent();
 		this.setToggle();
 		this.setEvent();
+		this.showImage();
 	},
 	setProductImage() {
 		var images = this.res.productImage;
 		if (images.length == 1) {
 			this.hideBtn();
 		}
-		this.setImageNo(images.length);
+		this.setNumOff(images.length);
 		var ul = document.querySelector('.group_visual ul.visual_img');
 		var template = document.querySelector('#image-list').innerHTML;
 		var html = '';
@@ -40,9 +41,8 @@ var app = {
 		}
 		ul.innerHTML = html;
 	},
-	setImageNo(length) {
-		var numOff = document.querySelector('.figure_pagination > span.num.off > span');
-		numOff.innerText = length;
+	setNumOff(length) {
+		document.querySelector('.figure_pagination > span.num.off > span').innerText = length;
 	},
 	hideBtn() {
 		$('.group_visual .prev').css('display', 'none');
@@ -77,9 +77,74 @@ var app = {
 		}, '[네이버예약 특별할인]<br>');
 		p.innerHTML = discountInfo.slice(0, -2).concat(' ', '할인');
 	},
+	showImage() {
+		var images = Array.from(document.querySelectorAll('.group_visual .visual_img .item'));
+		if (images.length == 1) {
+			images[0].style.transform = 'translate(0px)';
+		} else {
+			$('.group_visual .prev').click(function() {
+				
+			});
+			$('.group_visual .nxt').click(function() {
+				
+			});
+		}
+	},
+	clickBookingBtn() {
+		$('.section_btn button.bk_btn').click(() => {
+			window.location.href = '/reservation/reserve?id = ' + this.res.displayInfo.displayInfoId;
+		});
+	},
 	// 중간 영역
 	makeMiddleArea() {
-		
+		if (this.res.averageScore == 0) {
+			document.querySelector('.btn_review_more').style.display = 'none';
+			return;
+		}
+		this.setGradeArea();
+		this.showComments();
+		this.viewAll();
+	},
+	setGradeArea() {
+		var grade = this.res.averageScore.toFixed(1);
+		document.querySelector('.short_review_area em.graph_value').style.width = (grade * 20) + '%';
+		document.querySelector('.short_review_area .text_value span').innerText = grade;
+		document.querySelector('.short_review_area em.green').innerText = this.res.comments.length + '건';
+	},
+	showComments() {
+		var context = [];
+		var comments = this.res.comments.slice(0, 3);
+		for (var i = 0; i < comments.length; i++) {
+			var commentImage, commentImageCount;
+			if (comments[i].userCommentImage === null) {
+				commentImage = false;
+				commentImageCount = 0;
+			} else {
+				commentImage = comments[i].userCommentImage.saveFileName;
+				commentImageCount = 1;
+			}
+			var obj = {
+				"productDescription": this.res.displayInfo.productDescription,
+				"commentImage": commentImage,
+				"commentImageCount": commentImageCount,
+				"comment": comments[i].comment,
+				"score": comments[i].score,
+				"date": comments[i].reservationDate.match(/(\d+)-(\d+)-(\d+)/g)[0].split('-').join('.'),
+				"id": comments[i].email.slice(0, 4).concat('', '****')
+			}
+			context.push(obj);
+		}
+		var template = document.querySelector('#comment-list').innerText;
+		var bindTemplate = Handlebars.compile(template);
+		var bindHTML = context.reduce((prev, current) => {
+			return prev + bindTemplate(current);
+		}, '');
+		var ul = document.querySelector('.section_review_list .list_short_review').innerHTML = bindHTML;
+	},
+	viewAll() {
+		$('.section_review_list .btn_review_more').click(() => {
+			window.location.href = '/reservation/review?id=' + this.res.displayInfo.displayInfoId;
+		});
 	},
 	// 하단 영역 
 	makeBottomArea() {
