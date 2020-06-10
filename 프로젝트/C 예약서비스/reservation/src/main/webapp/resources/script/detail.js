@@ -9,7 +9,6 @@ var app = {
 		req.open('GET', '/reservation/api/products/' + urlParams.get('id'));
 		req.onload = function() {
 			var jsonRes = JSON.parse(req.response);
-			console.log(jsonRes);
 			window.app.setRes(jsonRes.displayInfoResponse);
 			window.app.makeTopArea();
 			window.app.makeMiddleArea();
@@ -23,7 +22,7 @@ var app = {
 		this.setProductContent();
 		this.setToggle();
 		this.setEvent();
-		this.showImage();
+		this.manageImageSlider();
 	},
 	setProductImage() {
 		var images = this.res.productImage;
@@ -67,32 +66,65 @@ var app = {
 	},
 	setEvent() {
 		var p = document.querySelector('.section_event .event_info .in_dsc');
-		if (this.res.productPrice.length == 1 && this.res.productPrice[0].discountRate == 0) {
+		
+		var discountFlag = false;
+		this.res.productPrice.forEach((price) => {
+			if (price.discountRate !== 0) {
+				discountFlag = true;
+			}
+		})
+		if (!discountFlag) {
 			document.querySelector('.section_event').style.display = 'none';
 			return;
 		}
+		
 		var discountInfo = this.res.productPrice.reduce((prev, cur) => {
 			if (cur.discountRate == 0) return prev + '';
 			return prev + cur.priceTypeName + '석 ' + cur.discountRate + '%, '
 		}, '[네이버예약 특별할인]<br>');
 		p.innerHTML = discountInfo.slice(0, -2).concat(' ', '할인');
 	},
-	showImage() {
-		var images = Array.from(document.querySelectorAll('.group_visual .visual_img .item'));
-		if (images.length == 1) {
-			images[0].style.transform = 'translate(0px)';
-		} else {
-			$('.group_visual .prev').click(function() {
-				
-			});
-			$('.group_visual .nxt').click(function() {
-				
-			});
+	manageImageSlider() {
+		var ul = document.querySelector('.group_visual .visual_img');
+		var ulOffset = ul.offsetWidth;
+		var imageCount = ul.children.length;
+		
+		if (ul.children.length == 1) {
+			ul.style.transform = 'translate(414px)';
+			return;
+		}
+		
+		var flag = false;
+		$('.group_visual .prev').click(() => {
+			moveSlide();
+			changePage();
+		});
+		$('.group_visual .nxt').click(() => { 
+			moveSlide();
+			changePage();
+		});
+		
+		function moveSlide(idx) {
+			if (flag) {
+				ul.style.transform = 'translate(0px)';
+			} else {
+				ul.style.transform = 'translate(' + ulOffset + 'px)';
+			}
+			flag = !flag;
+		}
+		
+		function changePage(idx) {
+			var num = document.querySelector('.pagination span.num');
+			if (flag) {
+				num.innerText = 2;
+			} else {
+				num.innerText = 1;				
+			}
 		}
 	},
 	clickBookingBtn() {
 		$('.section_btn button.bk_btn').click(() => {
-			window.location.href = '/reservation/reserve?id = ' + this.res.displayInfo.displayInfoId;
+			window.location.href = '/reservation/reserve?id=' + this.res.displayInfo.displayInfoId;
 		});
 	},
 	// 중간 영역
@@ -143,7 +175,8 @@ var app = {
 	},
 	viewAll() {
 		$('.section_review_list .btn_review_more').click(() => {
-			window.location.href = '/reservation/review?id=' + this.res.displayInfo.displayInfoId;
+		  var url = '/reservation/review?id=' + this.res.displayInfo.displayInfoId;
+			window.location.href = url;
 		});
 	},
 	// 하단 영역 
