@@ -72,14 +72,22 @@
 <body>
 <div class="container">
 	<h1><i>Guestbook</i></h1>
-	<p style="text-align: right;">count: ${ count }</p>
+	<p style="text-align: right;">count: ${ count } / cookie count: ${ cookieCount }
+	<c:if test="${sessionScope.isAdmin == 'true'}">
+	<br>
+	<a href="logout" style="text-decoration: none;">로그아웃</a>
+	</c:if>
+	</p>
 	<hr>
 		
 	<%-- forEach문을 이용해서 방명록 출력 --%>
 	<c:forEach items="${ guestbooks }" var="guestbook">
 		<div class="content">
 			<b>ID: ${ guestbook.id }. Writer: ${ guestbook.name }</b> ${ guestbook.regDate } 
-			<br/>
+			<c:if test="${sessionScope.isAdmin == 'true'}">
+				<a href="delete/${guestbook.id}">삭제</a>
+			</c:if>
+			<br>
 			${ guestbook.content } <br/>
 		</div>
 	</c:forEach>
