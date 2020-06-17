@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.eunhasoo.board.argumentresolver.HeaderInfo;
 import com.eunhasoo.board.dto.Guestbook;
 import com.eunhasoo.board.service.GuestbookService;
 
@@ -29,10 +30,15 @@ public class GuestbookController {
 	@Autowired
 	GuestbookService guestbookService;
 	
+	// 쿠키, 아규먼트 리졸버를 사용해보는 메소드
 	@GetMapping("/list")
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start,
 					   ModelMap modelMap, @CookieValue(value="count", defaultValue="0", required=false) String value,
-					   /* HttpServletRequest request ,*/ HttpServletResponse response) {
+					   /* HttpServletRequest request ,*/ HttpServletResponse response, HeaderInfo headerInfo) {
+		System.out.println("-------com.eunhasoo.board.controller.list()----------");
+		System.out.println("user-agent: " + headerInfo.get("user-agent"));
+		System.out.println("-----------------------------------------------------");
+		
 		// A. HttpServletRequest 객체를 이용한 쿠키 사용
 //		String value = null;
 //		boolean find = false;
@@ -46,7 +52,6 @@ public class GuestbookController {
 //				}
 //			}
 //		}
-//		
 //		if (!find) {
 //			value = "1";
 //		} else {
@@ -57,7 +62,7 @@ public class GuestbookController {
 //			}
 //		}
 		
-		// B. Spring MVC 어노테이션을 이용한 쿠키 사용
+		// B. Spring MVC 어노테이션(@CookieValue)을 이용한 쿠키 사용
 		try {
 			int i = Integer.parseInt(value);
 			value = Integer.toString(++i);
@@ -105,10 +110,10 @@ public class GuestbookController {
 		return "redirect:list"; // 작업이 성공하면 redirect 필요
 	}
 	
+	// HttpSession 객체로 세션을 활용하는 컨트롤러 메소드
 	@GetMapping("/guess")
 	public String guess(@RequestParam(name="number", required=false) Integer number, HttpSession session, ModelMap modelMap) {
 		String msg = null;
-		
 		// 파라미터가 없는 경우 (최초 요청) 카운트를 0으로 설정하고
 		// 1부터 100 사이의 랜덤한 값을 설정해서 모두 session에 담는다
 		if (number == null) {
@@ -143,6 +148,7 @@ public class GuestbookController {
 		return "guess";
 	}
 	
+	// Spring MVC Session 어노테이션으로 세션을 활용하는 메소드
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Long id, @SessionAttribute("isAdmin") String isAdmin,
 			HttpServletRequest request, RedirectAttributes redirectAttr) {
