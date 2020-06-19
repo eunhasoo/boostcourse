@@ -23,6 +23,7 @@ var app = {
 		this.setToggle();
 		this.setEvent();
 		this.manageImageSlider();
+		this.clickBookingBtn();
 	},
 	setProductImage() {
 		var images = this.res.productImage;
@@ -123,9 +124,10 @@ var app = {
 		}
 	},
 	clickBookingBtn() {
-		$('.section_btn button.bk_btn').click(() => {
-			window.location.href = '/reservation/reserve?id=' + this.res.displayInfo.displayInfoId;
-		});
+    $('.section_btn > button').click(() => {
+      var url = '/reservation/reserve?id=' + this.res.displayInfo.displayInfoId;
+      window.location.href = url;
+    });
 	},
 	// 중간 영역
 	makeMiddleArea() {
