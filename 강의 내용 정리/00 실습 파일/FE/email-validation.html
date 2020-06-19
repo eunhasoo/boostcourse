@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validation</title>
+    <style>
+        .container {
+            width: 400px;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid blue;
+        }
+        input {
+            width: 150px;
+        }
+        .inputWrap {
+            display: inline-block;
+        }
+        .result {
+            color: red;
+            font-size: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/join" id="myForm">
+            <div class="inputWrap">
+                <div class="email">
+                    <span>Email</span>
+                    <input type="text" name="email">
+                </div>
+                
+                <div class="passwd">
+                    <span>Password</span>
+                    <input type="password" name="password">
+                </div>
+            </div>
+
+            <input type="submit" value="submit" id="submit">
+        </form>
+    </div>
+
+    <section class="result"></section>
+</body>
+<script>
+    var btn = document.querySelector('#submit');
+    var email = document.querySelector('[name="email"]');
+    var res = document.querySelector('.result');
+
+    function inputValid(e) {
+        console.log(e.target.value);
+        var reg = /^[\w+_]\w+@\w+\.\w+$/;
+        var isValid = reg.test(e.target.value);
+        if (!isValid) {
+            res.innerHTML = '<p>유효한 이메일이 아닙니다.</p>';
+        } else {
+            res.innerHTML = '';
+        }
+    }
+
+    email.addEventListener('change', inputValid);
+</script>
+</html>
