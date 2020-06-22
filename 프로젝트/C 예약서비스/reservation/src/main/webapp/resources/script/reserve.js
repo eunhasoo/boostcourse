@@ -137,14 +137,16 @@ var reserveApp = {
               e.target.parentElement.nextElementSibling.classList.remove('on_color');
             }
 
-            
             this.changeTotalQty(1);
         }.bind(this));
       });
     },
-    // 하단 구역 (예매자 정보)
+    // 하단 구역 (예매자 정보 확인 및 예매 요청 전송)
     setBotArea() {
       this.showFullTerms();
+      this.checkAgreeBtn();
+//      this.validateOnChange();
+      this.reserveBtn();
     },
     showFullTerms() {
       var agmBtns = document.querySelectorAll('.section_booking_agreement .btn_agreement');
@@ -170,6 +172,90 @@ var reserveApp = {
     changeTotalQty(value) {
       var totalCount = document.querySelector('.inline_form.last #totalCount');
       totalCount.innerText = parseInt(totalCount.innerText) + value;
+    },
+    checkAgreeBtn(e) {
+      document.querySelector('#chk3').addEventListener('click', function() {
+        if (this.checked) {
+          document.querySelector('.bk_btn_wrap').classList.remove('disable');
+        } else {
+          document.querySelector('.bk_btn_wrap').classList.add('disable');
+        }
+      })
+    },
+    reserveBtn() {
+      document.querySelector('.box_bk_btn').addEventListener('click', function() {
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var tel = $('#tel').val();
+        var count = 0;
+        document.querySelectorAll('.count_control_input').forEach(c => {
+          if (c.value === "0") {
+            count++;
+          }
+        });
+        
+        if (!name) {
+          $('#name').css('color', 'red');
+          $('#name').val('빠짐없이 기입해주세요.');
+          clearTimeout(t);
+          var t = setTimeout(() => {
+            $('#name').css('color', 'black');
+            $('#name').val('');
+          }, 500)
+        } else if (!/^01[016-9]-\d{3,4}-\d{4}$/.test(tel) || tel === '') {
+          $('.warning_msg').css('visibility', 'visible');
+          setTimeout(function() {
+            $('.warning_msg').css('visibility', 'hidden');
+          }, 500)
+        } else if (!/^\w+@\w+\.\w+$/.test(email) || email === '') {
+          $('#email').css('color', 'red');
+          $('#email').val('형식에 맞게 빠짐없이 작성해주세요.');
+          clearTimeout(t);
+          var t = setTimeout(() => {
+            $('#email').css('color', 'black');
+            $('#email').val(email);
+          }, 500)
+        } else if (count == 3) {
+          $('.section_booking_ticket').css('background-color', 'antiquewhite');
+          setTimeout(() => {
+            $('.section_booking_ticket').css('background-color', '#fff');
+          }, 2000);
+        } else {
+          this.sendRequest();
+        }
+      });
+    },
+    validateOnChange() {
+      $('#tel').change(function() {
+        var tel = $(this).val();
+        if (!(/^01[016-9]-\d{3,4}-\d{4}$/.test(tel))) {
+          $('.warning_msg').css('visibility', 'visible');
+          setTimeout(function() {
+            $('.warning_msg').css('visibility', 'hidden');
+          }, 500)
+          return false;
+        } else {
+          return true;
+        }
+      })
+      
+      $('#email').change(function() {
+        var email = $(this).val();
+        if (!(/^\w+@\w+\.\w+$/.test(email))) {
+          $(this).css('color', 'red');
+          $(this).val('형식에 맞게 입력해주세요.');
+          setTimeout(function() {
+            $(this).css('color', 'black');
+            $(this).val(email);
+          }.bind(this), 500)
+          return false;
+        } else {
+          return true;
+        }
+      })
+    },
+    sendRequest() {
+      
     }
 }
 
