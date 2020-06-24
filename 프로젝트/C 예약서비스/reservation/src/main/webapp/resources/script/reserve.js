@@ -53,12 +53,12 @@ var reserveApp = {
       var priceClassify = '';
       for (var i = 0; i < this.res.productPrice.length; i++) {
         priceClassify += this.classification[this.res.productPrice[i].priceTypeName] + ' ' 
-        + this.res.productPrice[i].price + '원 / ';
+                          + this.res.productPrice[i].price + '원 / ';
       }
       priceClassify = priceClassify.slice(0, -3);
       html = template.replace('{placeName}', this.res.displayInfo.placeName)
-      .replace('{openingHours}', this.res.displayInfo.openingHours.replace(/\n/g,'<br>'))
-      .replace('{productPrice}', priceClassify);
+                     .replace('{openingHours}', this.res.displayInfo.openingHours.replace(/\n/g,'<br>'))
+                     .replace('{productPrice}', priceClassify);
       document.querySelector('.section_store_details').innerHTML = html;
     },
     // 중간 구역 (예매 수량)
@@ -70,12 +70,12 @@ var reserveApp = {
       var template = document.querySelector('#price-info').innerHTML;
       var html = '';
       for(var i = 0; i < this.res.productPrice.length; i++) {
-        var formattedPrice = (this.res.productPrice[i].price + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        var formattedPrice = (this.res.productPrice[i].price + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         html += template.replace('{priceTypeName}', this.classification[this.res.productPrice[i].priceTypeName])
-        .replace('{price}', formattedPrice);
+                        .replace('{price}', formattedPrice);
         if (this.res.productPrice[i].discountRate != 0) {
           html += '<em class="product_dsc">' + formattedPrice + '원 (' 
-          + this.res.productPrice[i].discountRate + '% 할인가)' + '</em>'
+                    + this.res.productPrice[i].discountRate + '% 할인가)' + '</em>'
         }
         html += '</div> </div>';
       }
@@ -97,7 +97,7 @@ var reserveApp = {
           
           // 총 금액 관리
           var money = e.target.parentElement.parentElement.parentElement.children[1].children[1]
-          .firstElementChild.innerText.split(',').join('');
+                      .firstElementChild.innerText.split(',').join('');
           var moneyTimesCount = parseInt(e.target.nextElementSibling.value) * parseInt(money);
           if (moneyTimesCount > 0) {
             e.target.parentElement.nextElementSibling.classList.add('on_color');
@@ -105,7 +105,7 @@ var reserveApp = {
             e.target.parentElement.nextElementSibling.classList.remove('on_color');
           }
           var totalPrice = e.target.parentElement.nextElementSibling.children[0];
-          totalPrice.innerText = (moneyTimesCount + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+          totalPrice.innerText = (moneyTimesCount + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
           
           this.changeTotalQty(-1);
         }.bind(this));
@@ -126,10 +126,10 @@ var reserveApp = {
 
             // 총 금액 관리
             var money = e.target.parentElement.parentElement.parentElement.children[1].children[1]
-            .firstElementChild.innerText.split(',').join('');
+                        .firstElementChild.innerText.split(',').join('');
             var moneyTimesCount = parseInt(e.target.previousElementSibling.value) * parseInt(money);
             var totalPrice = e.target.parentElement.nextElementSibling.children[0];
-            totalPrice.innerText = (moneyTimesCount + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            totalPrice.innerText = (moneyTimesCount + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
             if (moneyTimesCount > 0) {
               e.target.parentElement.nextElementSibling.classList.add('on_color');
@@ -145,8 +145,8 @@ var reserveApp = {
     setBotArea() {
       this.showFullTerms();
       this.checkAgreeBtn();
-//      this.validateOnChange();
-      this.reserveBtn();
+      this.validateOnChange();
+      this.addreserveBtnListener();
     },
     showFullTerms() {
       var agmBtns = document.querySelectorAll('.section_booking_agreement .btn_agreement');
@@ -177,62 +177,69 @@ var reserveApp = {
       document.querySelector('#chk3').addEventListener('click', function() {
         if (this.checked) {
           document.querySelector('.bk_btn_wrap').classList.remove('disable');
+          document.querySelector('.section_booking_agreement').style.backgroundColor = '#fff';
         } else {
           document.querySelector('.bk_btn_wrap').classList.add('disable');
         }
       })
     },
-    reserveBtn() {
+    addreserveBtnListener() {
       document.querySelector('.box_bk_btn').addEventListener('click', function() {
+        if (!document.querySelector('#chk3').checked) {
+          document.querySelector('.section_booking_agreement').style.backgroundColor = 'antiquewhite';
+          return;
+        }
+        
         var name = $('#name').val();
         var email = $('#email').val();
         var tel = $('#tel').val();
         var count = 0;
-        document.querySelectorAll('.count_control_input').forEach(c => {
-          if (c.value === "0") {
+        var priceType = document.querySelectorAll('.count_control_input');
+        priceType.forEach(p => {
+          if (p.value === "0") {
             count++;
           }
         });
         
-        if (!name) {
-          $('#name').css('color', 'red');
-          $('#name').val('빠짐없이 기입해주세요.');
-          clearTimeout(t);
-          var t = setTimeout(() => {
-            $('#name').css('color', 'black');
-            $('#name').val('');
-          }, 500)
-        } else if (!/^01[016-9]-\d{3,4}-\d{4}$/.test(tel) || tel === '') {
-          $('.warning_msg').css('visibility', 'visible');
-          setTimeout(function() {
-            $('.warning_msg').css('visibility', 'hidden');
-          }, 500)
-        } else if (!/^\w+@\w+\.\w+$/.test(email) || email === '') {
-          $('#email').css('color', 'red');
-          $('#email').val('형식에 맞게 빠짐없이 작성해주세요.');
-          clearTimeout(t);
-          var t = setTimeout(() => {
-            $('#email').css('color', 'black');
-            $('#email').val(email);
-          }, 500)
-        } else if (count == 3) {
-          $('.section_booking_ticket').css('background-color', 'antiquewhite');
-          setTimeout(() => {
+        if (count == priceType.length) {
+          var a = setInterval(() => {
+            $('.section_booking_ticket').css('background-color', 'antiquewhite');
+          }, 700);
+          var b = setInterval(() => {
             $('.section_booking_ticket').css('background-color', '#fff');
-          }, 2000);
+          }, 900);
+          setTimeout(() => {
+            clearInterval(a);
+            clearInterval(b);
+          }, 1800);
+        } else if (!name) {
+          $('.name_wrap .warning_msg').css('visibility', 'visible');
+          setTimeout(() => {
+            $('.name_wrap .warning_msg').css('visibility', 'hidden');
+          }, 800);
+        } else if (!/^01[016-9]-\d{3,4}-\d{4}$/.test(tel) || tel === '') {
+          $('.tel_wrap .warning_msg').css('visibility', 'visible');
+          setTimeout(() => {
+            $('.tel_wrap .warning_msg').css('visibility', 'hidden');
+          }, 800);
+        } else if (!/^\w+@\w+\.\w+$/.test(email) || email === '') {
+          $('.email_wrap .warning_msg').css('visibility', 'visible');
+          setTimeout(() => {
+            $('.email_wrap .warning_msg').css('visibility', 'hidden');
+          }, 800);
         } else {
           this.sendRequest();
         }
-      });
+      }.bind(this));
     },
     validateOnChange() {
       $('#tel').change(function() {
         var tel = $(this).val();
         if (!(/^01[016-9]-\d{3,4}-\d{4}$/.test(tel))) {
-          $('.warning_msg').css('visibility', 'visible');
+          $('.tel_wrap .warning_msg').css('visibility', 'visible');
           setTimeout(function() {
-            $('.warning_msg').css('visibility', 'hidden');
-          }, 500)
+            $('.tel_wrap .warning_msg').css('visibility', 'hidden');
+          }, 800)
           return false;
         } else {
           return true;
@@ -242,12 +249,10 @@ var reserveApp = {
       $('#email').change(function() {
         var email = $(this).val();
         if (!(/^\w+@\w+\.\w+$/.test(email))) {
-          $(this).css('color', 'red');
-          $(this).val('형식에 맞게 입력해주세요.');
+          $('.email_wrap .warning_msg').css('visibility', 'visible');
           setTimeout(function() {
-            $(this).css('color', 'black');
-            $(this).val(email);
-          }.bind(this), 500)
+            $('.email_wrap .warning_msg').css('visibility', 'hidden');
+          }.bind(this), 800)
           return false;
         } else {
           return true;
@@ -255,8 +260,55 @@ var reserveApp = {
       })
     },
     sendRequest() {
+      var date = $('.inline_form.last .inline_txt').text().slice(0, -6).split('.');
+      var now = new Date();
+      var reserveDate = new Date(date[0], date[1], date[2], now.getHours(), now.getMinutes(), now.getSeconds());
+      var reservationDate = `${
+          (reserveDate.getFullYear()).toString().padStart(4, '0')}/${
+          reserveDate.getMonth().toString().padStart(2, '0')}/${
+          reserveDate.getDate().toString().padStart(2, '0')} ${
+          reserveDate.getHours().toString().padStart(2, '0')}:${
+          reserveDate.getMinutes().toString().padStart(2, '0')}:${
+          reserveDate.getSeconds().toString().padStart(2, '0')}`;      
+      var prices = [];
+      var countInputs = document.querySelectorAll('.count_control_input');
+      for (var i = 0; i < countInputs.length; i++) {
+        if (countInputs[i].value !== '0') {
+          prices.push({
+            count: countInputs[i].value,
+            productPriceId: this.res.productPrice[i].productPriceId,
+            reservationInfoId: 0,
+            reservationInfoPriceId: 0
+          });
+        }
+      }
+      var name = $('#name').val();
+      var tel = $('#tel').val();
+      var email = $('#email').val();
+      var ReservationRequestDto = {
+          displayInfoId : this.res.displayInfo.displayInfoId,
+          productId : this.res.displayInfo.productId,
+          prices: prices,
+          reservationEmail : email,
+          reservationName : name,
+          reservationTelephone : tel,
+          reservationYearMonthDay : reservationDate
+      }
       
-    }
+      $.ajax({
+        url: '/reservation/api/reservations',
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(ReservationRequestDto),
+        success: function() {
+          alert('예약이 완료되었습니다.');
+          window.location.href = '/reservation';
+        },
+        error: function() {
+          alert('예약에 실패했습니다.');
+        }
+      })
+    },
 }
 
 document.addEventListener('DOMContentLoaded', () => {
