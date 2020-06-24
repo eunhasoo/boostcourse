@@ -1237,12 +1237,16 @@ button {
 }
 
 /* added by crong. */
-.form_horizontal .inline_form .inline_control.tel_wrap {
+.form_horizontal .inline_form .inline_control.tel_wrap,
+.form_horizontal .inline_form .inline_control.email_wrap,
+.form_horizontal .inline_form .inline_control.name_wrap {
     position: relative;
 }
     
 
-.form_horizontal .inline_form .inline_control.tel_wrap .warning_msg {
+.form_horizontal .inline_form .inline_control.tel_wrap .warning_msg,
+.form_horizontal .inline_form .inline_control.email_wrap .warning_msg,
+.form_horizontal .inline_form .inline_control.name_wrap .warning_msg {
     position: relative;
     position: absolute;
     top: 0;
@@ -1284,13 +1288,13 @@ button {
 }
 
 .group_visual .visual_img .item {
-    transform: translate(-414px);
+	transform: translate(-414px);
     overflow: hidden;
     position: relative;
     display: inline-block;
     white-space: normal;
     vertical-align: top;
-    -webkit-transition-duration: 1s;
+	-webkit-transition-duration: 1s;
     -moz-transition-duration: 1s;
     -o-transition-duration: 1s;
     transition-duration: 1s;

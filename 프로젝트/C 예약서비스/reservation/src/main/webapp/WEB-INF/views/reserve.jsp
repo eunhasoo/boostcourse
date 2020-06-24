@@ -66,16 +66,20 @@
                             <form class="form_horizontal">
                             <!-- form 시작 -->
                                 <div class="inline_form"> <label class="label" for="name"> <span class="spr_book ico_nessasary">필수</span> <span>예매자</span> </label>
-                                    <div class="inline_control"> <input type="text" name="name" id="name" class="text" placeholder="홍길동" maxlength="17"> </div>
+                                    <div class="inline_control name_wrap"> <input type="text" name="name" id="name" class="text" placeholder="홍길동" maxlength="17"> 
+                                        <div class="warning_msg">필수 입력 항목입니다.</div>
+                                    </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="tel"> <span class="spr_book ico_nessasary">필수</span> <span>연락처</span> </label>
                                     <div class="inline_control tel_wrap">
                                         <input type="tel" name="tel" id="tel" class="tel" value="" placeholder="010-0000-0000">
-                                        <div class="warning_msg">형식이 틀렸거나 너무 짧아요</div>
+                                        <div class="warning_msg">형식을 맞춰 작성해주세요.</div>
                                     </div>
                                 </div>
                                 <div class="inline_form"> <label class="label" for="email">  <span class="spr_book ico_nessasary">필수</span>  <span>이메일</span> </label>
-                                    <div class="inline_control"> <input type="email" name="email" id="email" class="email" value="" placeholder="example@example.com" maxlength="50"> </div>
+                                    <div class="inline_control email_wrap"> <input type="email" name="email" id="email" class="email" value="" placeholder="example@example.com" maxlength="50"> 
+                                        <div class="warning_msg">형식을 맞춰 작성해주세요.</div>
+                                	</div>
                                 </div>
                                 <div class="inline_form last"> <label class="label" for="message">예매내용</label>
                                     <div class="inline_control">
