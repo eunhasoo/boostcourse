@@ -38,14 +38,14 @@ public class ReservationDao {
 	public Integer saveReservation(ReservationDto dto) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		SqlParameterSource parameters = new MapSqlParameterSource().addValue("productId", dto.getProductId())
-																   .addValue("displayInfoId", dto.getDisplayInfoId())
-																   .addValue("reservationName", dto.getReservationName())
-																   .addValue("reservationEmail", dto.getReservationEmail())
-																   .addValue("reservationTel", dto.getReservationTel())
-																   .addValue("cancelFlag", dto.isCancelFlag())
-																   .addValue("reservationDate", dto.getReservationDate())
-																   .addValue("createDate", dto.getCreateDate())
-																   .addValue("modifyDate", dto.getModifyDate());
+									   .addValue("displayInfoId", dto.getDisplayInfoId())
+									   .addValue("reservationName", dto.getReservationName())
+									   .addValue("reservationEmail", dto.getReservationEmail())
+									   .addValue("reservationTel", dto.getReservationTel())
+									   .addValue("cancelFlag", dto.isCancelFlag())
+									   .addValue("reservationDate", dto.getReservationDate())
+									   .addValue("createDate", dto.getCreateDate())
+									   .addValue("modifyDate", dto.getModifyDate());
 		jdbcTemplate.update(INSERT_RESERVATION, parameters, keyHolder);
 		return keyHolder.getKey() != null ? keyHolder.getKey().intValue() : 0;
 	}
@@ -56,11 +56,10 @@ public class ReservationDao {
 		for (int i = 0; i < prices.size(); i++) {
 			price = prices.get(i);
 			parameters = new MapSqlParameterSource().addValue("productPriceId", price.getProductPriceId())
-													.addValue("reservationInfoId", reservationInfoId)
-													.addValue("count", price.getCount());
+								.addValue("reservationInfoId", reservationInfoId)
+								.addValue("count", price.getCount());
 			jdbcTemplate.update(INSERT_RESERVATION_INFO_PRICE, parameters);
 		}
 	}
-	
 	
 }
