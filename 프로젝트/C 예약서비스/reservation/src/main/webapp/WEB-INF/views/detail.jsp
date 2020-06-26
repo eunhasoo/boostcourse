@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    String email = "";
+    if (session.getAttribute("userEmail") != null) {
+        email = (String) session.getAttribute("userEmail");
+    }
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -31,7 +37,7 @@
                     <a class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                     <a href="/reservation" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                 </h1>
-                <a href="#" class="btn_my"> <span title="예약확인">예약확인</span> </a>
+                <a href="login" class="btn_my"> <span title="예약확인">예약확인</span> </a>
             </header>
         </div>
         <div class="ct main">
@@ -42,7 +48,7 @@
                             <a class="lnk_logo" title="네이버"> <span class="spr_bi ico_n_logo">네이버</span> </a>
                             <a href="/reservation" class="lnk_logo" title="예약"> <span class="spr_bi ico_bk_logo">예약</span> </a>
                         </h1>
-                        <a href="myreservation" class="btn_my"> <span class="viewReservation" title="예약확인">예약확인</span> </a>
+                        <a href="#" class="btn_my"> <span class="viewReservation" title="예약확인"><%= email.equals("") ? "예약확인" : email %></span> </a>
                     </header>
                     <div class="pagination">
                         <div class="bg_pagination"></div>
