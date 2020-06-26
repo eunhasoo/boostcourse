@@ -76,12 +76,10 @@ public class ReservationRequestDto {
 				+ ", reservationYearMonthDay=" + reservationYearMonthDay + ", reservationTelephone="
 				+ reservationTelephone + "]";
 	}
-	
+
 	public ReservationDto toDTO() {
 		String now = LocalDateTime.now().toString();
-		return new ReservationDto(
-				this.displayInfoId, this.productId, this.prices, this.reservationEmail,
-				this.reservationName, this.reservationYearMonthDay, this.reservationTelephone,
-				0, false, now, now);
+		return new ReservationDto(this.displayInfoId, this.productId, this.reservationEmail, this.reservationName,
+				this.reservationYearMonthDay, this.reservationTelephone, 0, false, now, now);
 	}
 }

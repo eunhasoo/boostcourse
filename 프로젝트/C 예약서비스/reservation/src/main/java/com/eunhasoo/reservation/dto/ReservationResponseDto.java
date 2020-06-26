@@ -1,6 +1,6 @@
 package com.eunhasoo.reservation.dto;
 
-public class ReservationDto {
+public class ReservationResponseDto {
 
 	private Integer displayInfoId;
 	private Integer productId;
@@ -8,22 +8,21 @@ public class ReservationDto {
 	private String reservationName;
 	private String reservationDate;
 	private String reservationTel;
-	private Integer id;
 	private Boolean cancelFlag;
 	private String createDate;
 	private String modifyDate;
+	private Integer totalPrice;
+	private DisplayInfo displayInfo;
 
-	public ReservationDto() { }
-	public ReservationDto(Integer displayInfoId, Integer productId, String reservationEmail, String reservationName,
-			String reservationDate, String reservationTel, Integer id, Boolean cancelFlag, String createDate,
-			String modifyDate) {
+	public ReservationResponseDto(Integer displayInfoId, Integer productId, String reservationEmail,
+			String reservationName, String reservationDate, String reservationTel, Boolean cancelFlag,
+			String createDate, String modifyDate) {
 		this.displayInfoId = displayInfoId;
 		this.productId = productId;
 		this.reservationEmail = reservationEmail;
 		this.reservationName = reservationName;
 		this.reservationDate = reservationDate;
 		this.reservationTel = reservationTel;
-		this.id = id;
 		this.cancelFlag = cancelFlag;
 		this.createDate = createDate;
 		this.modifyDate = modifyDate;
@@ -77,15 +76,7 @@ public class ReservationDto {
 		this.reservationTel = reservationTel;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Boolean isCancelFlag() {
+	public Boolean getCancelFlag() {
 		return cancelFlag;
 	}
 
@@ -109,10 +100,20 @@ public class ReservationDto {
 		this.modifyDate = modifyDate;
 	}
 
-	public ReservationResponseDto toResponseDto(ReservationDto dto) {
-		return new ReservationResponseDto(this.displayInfoId, this.productId, this.reservationEmail,
-				this.reservationName, this.reservationDate, this.reservationTel, this.cancelFlag, this.createDate,
-				this.modifyDate);
+	public Integer getTotalPrice() {
+		return totalPrice;
 	}
 
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public DisplayInfo getDisplayInfo() {
+		return displayInfo;
+	}
+
+	public void setDisplayInfo(DisplayInfo displayInfo) {
+		this.displayInfo = displayInfo;
+	}
+	
 }
