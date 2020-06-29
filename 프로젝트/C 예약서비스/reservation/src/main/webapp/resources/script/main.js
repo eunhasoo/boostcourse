@@ -20,7 +20,7 @@ function getItems(categoryId, start) {
 		var rightTemplate = '';
 		var itemList = res.items;
 		for (var i = 0; i < itemList.length; i++) {
-			if (i % 2 == 0) {
+			if (i % 2 != 0) {
 				rightTemplate = itemTemplate.replace('{id}', itemList[i].displayInfoId)
 							    .replace('{productContent}', itemList[i].productContent)
 							    .replace('{productImageUrl}', itemList[i].productImageUrl)
