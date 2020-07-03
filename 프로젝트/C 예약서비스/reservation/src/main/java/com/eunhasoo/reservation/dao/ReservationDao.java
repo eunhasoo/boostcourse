@@ -123,8 +123,8 @@ public class ReservationDao {
 		Map<String, Object> params = new HashMap<>();
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
 		params.put("flag", true);
-		params.put("modify_date", timestamp);
-		params.put("reservationId", reservationId);
+		params.put("modifyDate", timestamp);
+		params.put("reservationInfoId", reservationId);
 		jdbcTemplate.update(UPDATE_CANCEL_FLAG, params);
 	}
 }
