@@ -17,10 +17,10 @@ function reservationListener() {
   if (viewReservation && viewReservation.innerText !== '예약확인') {
     if (viewReservation.parentElement.tagName === 'A') {
       viewReservation.parentElement.addEventListener('click', () => {
-        window.location.href = '/reservation/api/reservations?resrv_email=' + viewReservation.innerText;
+        window.location.href = '/reservation/myreservation?resrv_email=' + viewReservation.innerText;
       });
     }
-  } else {
+  } else if (viewReservation) {
     viewReservation.parentElement.addEventListener('click', () => {
       window.location.href = 'login';
     });
