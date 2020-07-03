@@ -48,11 +48,11 @@ var myReservationApp = {
         if (!cur.cancelFlag && date >= today) {
           ++confirmedCount;
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-          .replace('{{reservationId}}', cur.reservationInfoId)
-          .replace('{{reservationId}}', cur.reservationInfoId)
-          .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
-          .replace('{{place}}', cur.displayInfo.placeName)
-          .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+                                .replace('{{reservationId}}', cur.reservationInfoId)
+                    .replace('{{reservationId}}', cur.reservationInfoId)
+                    .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
+                    .replace('{{place}}', cur.displayInfo.placeName)
+                    .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
         } else return prev + '';
       }, '');
       if (confirmedCount > 0) {
@@ -72,11 +72,11 @@ var myReservationApp = {
         if (!cur.cancelFlag && date <= today) {
           ++usedCount;
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-          .replace('{{reservationId}}', cur.reservationInfoId)
-          .replace('{{reservationId}}', cur.reservationInfoId)
-          .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
-          .replace('{{place}}', cur.displayInfo.placeName)
-          .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+                                .replace('{{reservationId}}', cur.reservationInfoId)
+                    .replace('{{reservationId}}', cur.reservationInfoId)
+                    .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
+                    .replace('{{place}}', cur.displayInfo.placeName)
+                    .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
         }  else return prev + '';
       }, '');
       if (usedCount > 0) {
@@ -95,10 +95,10 @@ var myReservationApp = {
           canceledCount++;
           var date = new Date(cur.reservationDate);
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-          .replace('{{reservationId}}', cur.reservationInfoId)
-          .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
-          .replace('{{place}}', cur.displayInfo.placeName)
-          .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
+                                .replace('{{reservationId}}', cur.reservationInfoId)
+                    .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
+                    .replace('{{place}}', cur.displayInfo.placeName)
+                    .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
         } else return prev + '';
       }, ' ');
       if (canceledCount > 0) {
