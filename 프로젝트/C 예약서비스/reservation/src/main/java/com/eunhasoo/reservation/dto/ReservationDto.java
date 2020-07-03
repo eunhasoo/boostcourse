@@ -112,7 +112,7 @@ public class ReservationDto {
 	public ReservationResponseDto toResponseDto(ReservationDto dto) {
 		return new ReservationResponseDto(this.displayInfoId, this.productId, this.reservationEmail,
 				this.reservationName, this.reservationDate, this.reservationTel, this.cancelFlag, this.createDate,
-				this.modifyDate);
+				this.modifyDate, this.id);
 	}
 
 }
