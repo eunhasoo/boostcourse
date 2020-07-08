@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.eunhasoo.reservation.dto.CommentRequestDto;
 import com.eunhasoo.reservation.dto.ReservationRequestDto;
 import com.eunhasoo.reservation.dto.ReservationResponseDto;
 import com.eunhasoo.reservation.service.ReservationService;
@@ -52,4 +53,8 @@ public class ReservationApiController {
 		reservationService.updateReservation(reservationId);
 	}
 	
+	@PostMapping("/api/reservations/{reservationInfoId}/comments")
+	public void comments(@PathVariable Integer reservationInfoId, CommentRequestDto commentRequestDto) {
+		
+	}
 }
