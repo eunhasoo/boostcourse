@@ -8,8 +8,9 @@ var reserveApp = {
       'D': '장애인',
       'C': '지역주민',
       'E': '얼리어버드',
-      'V': 'VIP',
+      'V': 'VIP석',
       'R': 'R석',
+      'B2': 'B석',
       'S': 'S석',
       'D': '평일'
     },
@@ -71,7 +72,11 @@ var reserveApp = {
       var html = '';
       for(var i = 0; i < this.res.productPrice.length; i++) {
         var formattedPrice = (this.res.productPrice[i].price + '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-        html += template.replace('{priceTypeName}', this.classification[this.res.productPrice[i].priceTypeName])
+        var type = this.res.productPrice[i].priceTypeName;
+        if (this.res.displayInfo.categoryId == 2 && type === 'B') {
+          type = 'B2';
+        }
+        html += template.replace('{priceTypeName}', this.classification[type])
                         .replace('{price}', formattedPrice);
         if (this.res.productPrice[i].discountRate != 0) {
           html += '<em class="product_dsc">' + formattedPrice + '원 (' 

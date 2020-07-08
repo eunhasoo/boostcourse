@@ -1,5 +1,19 @@
 var app = {
 	res: '',
+    classification: {
+      'A': '성인',
+      'Y': '청소년',
+      'B': '유아',
+      'S': '셋트',
+      'D': '장애인',
+      'C': '지역주민',
+      'E': '얼리어버드',
+      'V': 'VIP석',
+      'R': 'R석',
+      'B2': 'B석',
+      'S': 'S석',
+      'D': '평일'
+    },
 	setRes(res) {
 		this.res = res;
 	},
@@ -81,7 +95,11 @@ var app = {
 		
 		var discountInfo = this.res.productPrice.reduce((prev, cur) => {
 			if (cur.discountRate == 0) return prev + '';
-			return prev + cur.priceTypeName + '석 ' + cur.discountRate + '%, '
+			var type = cur.priceTypeName;
+	        if (this.res.displayInfo.categoryId == 2 && type === 'B') {
+	          type = 'B2';
+	        }
+	        return prev + this.classification[type] + ' ' + cur.discountRate + '%, ';
 		}, '[네이버예약 특별할인]<br>');
 		p.innerHTML = discountInfo.slice(0, -2).concat(' ', '할인');
 	},

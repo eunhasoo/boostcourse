@@ -48,7 +48,7 @@ var myReservationApp = {
         if (!cur.cancelFlag && date >= today) {
           ++confirmedCount;
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-                                .replace('{{reservationId}}', cur.reservationInfoId)
+                                .replace('{{reservationId}}', (cur.reservationInfoId + '').padStart(8, '0'))
                                 .replace('{{reservationId}}', cur.reservationInfoId)
                                 .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
                                 .replace('{{place}}', cur.displayInfo.placeName)
@@ -72,10 +72,11 @@ var myReservationApp = {
         if (!cur.cancelFlag && date <= today) {
           ++usedCount;
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-                                .replace('{{reservationId}}', cur.reservationInfoId)
+                                .replace('{{reservationId}}', (cur.reservationInfoId + '').padStart(8, '0'))
                                 .replace('{{reservationId}}', cur.reservationInfoId)
                                 .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
                                 .replace('{{place}}', cur.displayInfo.placeName)
+                                .replace('{{productId}}', cur.productId)
                                 .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
         }  else return prev + '';
       }, '');
@@ -95,7 +96,7 @@ var myReservationApp = {
           canceledCount++;
           var date = new Date(cur.reservationDate);
           return prev + template.replace('{{description}}', cur.displayInfo.productDescription)
-                                .replace('{{reservationId}}', cur.reservationInfoId)
+                                .replace('{{reservationId}}', (cur.reservationInfoId + '').padStart(8, '0'))
                                 .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
                                 .replace('{{place}}', cur.displayInfo.placeName)
                                 .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
@@ -111,8 +112,11 @@ var myReservationApp = {
     addCancelEventListener: function() {
       var btns = document.querySelectorAll('.booking_cancel .btn');
       btns.forEach((btn) => {
-        if (btn.firstElementChild.textContent === '취소')
+        if (btn.firstElementChild.textContent === '취소') {
           btn.addEventListener('click', this.cancelReservation);
+        } else if (btn.firstElementChild.textContent === '예매자 리뷰 남기기') {
+          btn.addEventListener('click', this.goWriteReview);
+        }
       });
     },
     cancelReservation: function(e) {
@@ -127,6 +131,20 @@ var myReservationApp = {
         alert('예약 취소에 실패하였습니다.');
       }
       req.send();
+    },
+    goWriteReview: function(e) {
+      var reservationInfoId, productId, title;
+      if (e.target.tagName === 'SPAN') {
+        reservationInfoId = e.target.parentElement.id;
+        productId = e.target.parentElement.parentElement.id;
+        title = e.target.parentElement.parentElement.parentElement.children[1].textContent.trim();
+      } else {
+        reservationInfoId = e.target.id;
+        productId = e.target.parentElement.id;
+        title = e.target.parentElement.parentElement.children[1].textContent.trim();
+      }
+      var url = '/reservation/reviewWrite?rid=' + reservationInfoId + '&pid=' + productId + '&tit=' + title;
+      window.location.href = url;
     }
 }
 

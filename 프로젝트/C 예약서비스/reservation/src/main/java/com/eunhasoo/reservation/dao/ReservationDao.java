@@ -38,14 +38,15 @@ public class ReservationDao {
 			"select id, product_id, display_info_id, reservation_name, reservation_tel, reservation_email, "
 			+ "reservation_date, cancel_flag, create_date, modify_date "
 			+ "from reservation_info "
-			+ "where reservation_email = :email";
+			+ "where reservation_email = :email "
+			+ "order by id desc";
 	
 	private final String SELECT_TOTAL_PRICE = 
 			"select sum(count * price) as total_price " 
 			+ "from reservation_info_price r, product_price p "
 			+ "where r.product_price_id = p.id "
 			+ "and reservation_info_id = :reservationInfoId " 
-			+ "group by reservation_info_id;";
+			+ "group by reservation_info_id";
 	
 	private final String UPDATE_CANCEL_FLAG = 
 			"update reservation_info "
