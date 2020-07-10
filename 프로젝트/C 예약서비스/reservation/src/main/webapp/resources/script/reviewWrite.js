@@ -59,10 +59,10 @@ var reviewWriteApp = {
     },
     checkAllDone: function() {
       const score = document.querySelector('.review_rating.rating_point .star_rank').innerText;
-      const charCount = document.querySelector('.ct .review_write_footer_wrap .guide_review span').innerText;
+      const charCount = document.querySelector('.ct .review_contents .review_textarea').value.length;
       if (score === '0') {
         alert('별점을 선택해주세요.');
-      } else if (charCount < '5') {
+      } else if (charCount < 5) {
         alert('최소 5자 이상으로 입력해주세요.');
       }
       return (score !== '0' && charCount >= '5');
@@ -78,28 +78,34 @@ var reviewWriteApp = {
         const reservationInfoId = parseInt(urlParams.get('rid'));
         const score = parseInt(document.querySelector('.review_rating.rating_point .star_rank').innerText);
         const comment = document.querySelector('.ct .review_contents .review_textarea').value;
-        const file = document.querySelector('#reviewImageFileOpenInput').value;
+        const file = document.querySelector('#reviewImageFileOpenInput').files[0];
         const commentRequestDto = {
             productId,
             reservationInfoId,
             score,
             comment,
-            file
-        };
+        }
+        
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('commentRequestDto', 
+            new Blob([JSON.stringify(commentRequestDto)], {type: "application/json"})
+        );
+        
         $.ajax({
           url: '/reservation/api/reservations/' + reservationInfoId + '/comments',
+          data: formData,
           type: 'POST',
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify(commentRequestDto),
+          contentType: false, // NEEDED, DON'T OMIT THIS
+          processData: false, // NEEDED, DON'T OMIT THIS
           success: function() {
             alert('한줄평 작성이 완료되었습니다.');
-            window.location.href = '/reservation/review?id' + productId;
+            window.location.href = '/reservation/review?id=' + urlParams.get('did');
           },
           error: function() {
             alert('오류가 발생했습니다. 다시 시도해주세요.');
           }
         })
-
       }.bind(this));
     }
 }

@@ -228,7 +228,7 @@
           </div>
           <!-- [D] 예약 신청중, 예약 확정 만 취소가능, 취소 버튼 클릭 시 취소 팝업 활성화 -->
           <div class="booking_cancel" id="{{productId}}">
-            <button class="btn" id="{{reservationId}}"><span>예매자 리뷰 남기기</span></button>
+            <button class="btn" id="{{reservationId}}"><span id="{{displayInfoId}}">예매자 리뷰 남기기</span></button>
           </div>
           </div>
           </div>

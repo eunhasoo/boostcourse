@@ -75,6 +75,7 @@ var myReservationApp = {
                                 .replace('{{reservationId}}', (cur.reservationInfoId + '').padStart(8, '0'))
                                 .replace('{{reservationId}}', cur.reservationInfoId)
                                 .replace('{{date}}', date.toLocaleDateString() + ' ' + this.day[date.getDay()])
+                                .replace('{{displayInfoId}}', cur.displayInfoId)
                                 .replace('{{place}}', cur.displayInfo.placeName)
                                 .replace('{{productId}}', cur.productId)
                                 .replace('{{total}}', (cur.totalPrice + '').replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
@@ -133,17 +134,20 @@ var myReservationApp = {
       req.send();
     },
     goWriteReview: function(e) {
-      var reservationInfoId, productId, title;
+      var reservationInfoId, productId, displayInfoId, title;
       if (e.target.tagName === 'SPAN') {
         reservationInfoId = e.target.parentElement.id;
         productId = e.target.parentElement.parentElement.id;
         title = e.target.parentElement.parentElement.parentElement.children[1].textContent.trim();
+        displayInfoId = e.target.id;
       } else {
         reservationInfoId = e.target.id;
         productId = e.target.parentElement.id;
         title = e.target.parentElement.parentElement.children[1].textContent.trim();
+        displayInfoId = e.target.firstElementChild.id;
       }
-      var url = '/reservation/reviewWrite?rid=' + reservationInfoId + '&pid=' + productId + '&tit=' + title;
+      var url = '/reservation/reviewWrite?rid=' + reservationInfoId + '&pid=' 
+                + productId + '&did=' + displayInfoId + '&tit=' + title;
       window.location.href = url;
     }
 }
