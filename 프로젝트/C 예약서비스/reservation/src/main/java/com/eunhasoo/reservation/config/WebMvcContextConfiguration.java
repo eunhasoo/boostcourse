@@ -3,12 +3,16 @@ package com.eunhasoo.reservation.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import com.eunhasoo.reservation.interceptor.RequestInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -47,4 +51,20 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
+    
+	@Bean
+	public MultipartResolver multipartResolver() {
+		// Commons Multipart Resolver 생성
+	    org.springframework.web.multipart.commons.CommonsMultipartResolver multipartResolver = new org.springframework.web.multipart.commons.CommonsMultipartResolver();
+	    multipartResolver.setMaxUploadSize(10485760); // 1024 * 1024 * 10 (10MB)
+	    return multipartResolver;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		// TODO Auto-generated method stub
+		super.addInterceptors(registry);
+		registry.addInterceptor(new RequestInterceptor());
+	}
+	
 }
