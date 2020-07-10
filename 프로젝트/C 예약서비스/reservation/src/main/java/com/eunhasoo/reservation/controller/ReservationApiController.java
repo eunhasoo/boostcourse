@@ -13,21 +13,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.eunhasoo.reservation.dto.CommentRequestDto;
 import com.eunhasoo.reservation.dto.ReservationRequestDto;
 import com.eunhasoo.reservation.dto.ReservationResponseDto;
+import com.eunhasoo.reservation.service.CommentService;
 import com.eunhasoo.reservation.service.ReservationService;
+
 
 @RestController
 public class ReservationApiController {
-
+	
 	private final ReservationService reservationService;
+	private final CommentService commentService;
 	
 	@Autowired
-	public ReservationApiController(ReservationService reservationService) {
+	public ReservationApiController(ReservationService reservationService, CommentService commentService) {
 		this.reservationService = reservationService;
+		this.commentService = commentService;
 	}
 	
 	@PostMapping("/api/reservations")
@@ -53,8 +59,10 @@ public class ReservationApiController {
 		reservationService.updateReservation(reservationId);
 	}
 	
-	@PostMapping("/api/reservations/{reservationInfoId}/comments")
-	public void comments(@PathVariable Integer reservationInfoId, CommentRequestDto commentRequestDto) {
-		
+	@PostMapping(value="/api/reservations/{reservationInfoId}/comments", consumes = { "multipart/form-data" })
+	public void comments(@PathVariable Integer reservationInfoId, @RequestPart CommentRequestDto commentRequestDto,
+			@RequestPart MultipartFile file) {
+		Integer commentId = commentService.insertComment(commentRequestDto);
+		commentService.insertCommentImage(reservationInfoId, commentId, file);
 	}
 }

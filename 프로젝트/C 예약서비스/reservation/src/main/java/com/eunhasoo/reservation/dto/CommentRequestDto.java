@@ -2,19 +2,10 @@ package com.eunhasoo.reservation.dto;
 
 public class CommentRequestDto {
 
-	private byte[] file;
 	private String comment;
 	private Integer productId;
 	private Integer reservationInfoId;
 	private Integer score;
-
-	public byte[] getFile() {
-		return file;
-	}
-
-	public void setFile(byte[] file) {
-		this.file = file;
-	}
 
 	public String getComment() {
 		return comment;
