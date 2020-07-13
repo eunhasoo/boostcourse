@@ -83,11 +83,13 @@ var reviewWriteApp = {
             productId,
             reservationInfoId,
             score,
-            comment,
+            comment
         }
         
         const formData = new FormData();
-        formData.append('file', file);
+        if (file) {
+          formData.append('file', file);
+        }
         formData.append('commentRequestDto', 
             new Blob([JSON.stringify(commentRequestDto)], {type: "application/json"})
         );

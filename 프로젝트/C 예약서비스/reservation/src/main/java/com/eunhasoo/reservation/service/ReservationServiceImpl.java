@@ -30,16 +30,16 @@ public class ReservationServiceImpl implements ReservationService {
 	@Transactional
 	public Integer saveReservation(ReservationRequestDto reservationRequestDto) {
 		ReservationDto dto = reservationRequestDto.toDTO();
-		Integer reservationInfoId = reservationDao.saveReservation(dto);
+		Integer reservationInfoId = reservationDao.insertReservation(dto);
 		List<ReservationPrice> prices = reservationRequestDto.getPrices();
 		if (reservationInfoId != 0 & prices != null && prices.size() > 0)
 			saveReservationPrice(reservationInfoId, prices);
-		return 0;
+		return reservationInfoId;
 	}
 
 	@Override
 	public void saveReservationPrice(Integer reservationInfoId, List<ReservationPrice> prices) {
-		reservationDao.saveReservationPrice(reservationInfoId, prices);
+		reservationDao.insertReservationPrice(reservationInfoId, prices);
 	}
 
 	@Override

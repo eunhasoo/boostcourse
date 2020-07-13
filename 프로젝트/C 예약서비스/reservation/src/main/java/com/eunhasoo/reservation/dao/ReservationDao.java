@@ -61,7 +61,7 @@ public class ReservationDao {
 		this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 	}
 	
-	public Integer saveReservation(ReservationDto dto) {
+	public Integer insertReservation(ReservationDto dto) {
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		SqlParameterSource parameters = new MapSqlParameterSource().addValue("productId", dto.getProductId())
 									   .addValue("displayInfoId", dto.getDisplayInfoId())
@@ -76,7 +76,7 @@ public class ReservationDao {
 		return keyHolder.getKey() != null ? keyHolder.getKey().intValue() : 0;
 	}
 	
-	public void saveReservationPrice(Integer reservationInfoId, List<ReservationPrice> prices) {
+	public void insertReservationPrice(Integer reservationInfoId, List<ReservationPrice> prices) {
 		SqlParameterSource parameters;
 		ReservationPrice price;
 		for (int i = 0; i < prices.size(); i++) {

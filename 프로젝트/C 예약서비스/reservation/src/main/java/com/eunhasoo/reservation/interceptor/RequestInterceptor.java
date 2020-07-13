@@ -18,10 +18,10 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.debug("요청 URL: {}", request.getRequestURI());
-		logger.debug("요청 시간: {}", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-		logger.debug("클라이언트 IP: {}", request.getRemoteAddr());
-		
+		logger.debug("[URL] {} [요청시간] {} [IP] {}", 
+				request.getRequestURI(), 
+				LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), 
+				request.getRemoteAddr());
 		return super.preHandle(request, response, handler);
 	}
 
