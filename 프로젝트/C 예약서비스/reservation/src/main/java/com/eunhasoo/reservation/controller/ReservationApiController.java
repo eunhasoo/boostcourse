@@ -61,8 +61,7 @@ public class ReservationApiController {
 	
 	@PostMapping(value="/api/reservations/{reservationInfoId}/comments", consumes = { "multipart/form-data" })
 	public void comments(@PathVariable Integer reservationInfoId, @RequestPart CommentRequestDto commentRequestDto,
-			@RequestPart MultipartFile file) {
-		Integer commentId = commentService.insertComment(commentRequestDto);
-		commentService.insertCommentImage(reservationInfoId, commentId, file);
+			@RequestPart(required=false) MultipartFile file) {
+		commentService.saveComment(commentRequestDto, file, reservationInfoId);
 	}
 }

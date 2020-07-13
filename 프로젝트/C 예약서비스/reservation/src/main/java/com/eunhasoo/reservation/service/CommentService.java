@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.eunhasoo.reservation.dto.CommentRequestDto;
 
 public interface CommentService {
-	public Integer insertComment(CommentRequestDto commentRequestDto);
-	public void insertCommentImage(Integer reservationInfoId, Integer commentId, MultipartFile imageFile);
+	public void saveComment(CommentRequestDto commentRequestDto, MultipartFile imageFile, Integer reservationInfoId);
+	public Integer saveImageFile(MultipartFile imageFile, Integer reservationInfoId);
+	public void saveCommentImage(Integer reservationInfoId, Integer userCommentId, Integer fileId);
 }

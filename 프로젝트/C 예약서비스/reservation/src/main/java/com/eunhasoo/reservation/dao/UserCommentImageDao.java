@@ -15,12 +15,17 @@ import com.eunhasoo.reservation.dto.UserCommentImage;
 @Repository
 public class UserCommentImageDao {
 
-	private final String SELECT_BY_ID = "select r.id as ImageId, r.reservation_info_id as reservationInfoId, r.reservation_user_comment_id as reservationUserCommentId, "
-			+ "f.content_type, f.save_file_name, f.delete_flag, f.id as fileId, f.file_name, f.create_date, f.modify_date "
-			+ "from reservation_user_comment_image r " + "inner join file_info f on r.file_id = f.id "
-			+ "inner join reservation_info i on r.id = i.id " + "where r.reservation_user_comment_id = :userCommentId "
-			+ "LIMIT 1";
+	private final String SELECT_BY_ID 
+	= "select r.id as ImageId, r.reservation_info_id as reservationInfoId, r.reservation_user_comment_id as reservationUserCommentId, "
+		+ "f.content_type, f.save_file_name, f.delete_flag, f.id as fileId, f.file_name, f.create_date, f.modify_date "
+		+ "from reservation_user_comment_image r " + "inner join file_info f on r.file_id = f.id "
+		+ "inner join reservation_info i on r.id = i.id " + "where r.reservation_user_comment_id = :userCommentId "
+		+ "LIMIT 1";
 
+	private final String INSERT_COMMENT_IMAGE 
+	= "insert into reservation_user_comment_image (reservation_info_id, reservation_user_comment_id, file_id) "
+		+ "values (:reservationInfoId, :userCommentId, :fileId)";
+	
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
 	@Autowired
@@ -42,6 +47,14 @@ public class UserCommentImageDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+	
+	public void insertCommentImage(Integer reservationInfoId, Integer userCommentId, Integer fileId) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("reservationInfoId", reservationInfoId);
+		params.put("userCommentId", userCommentId);
+		params.put("fileId", fileId);
+		jdbcTemplate.update(INSERT_COMMENT_IMAGE, params);
 	}
 
 }
