@@ -32,7 +32,7 @@ var reviewApp = {
                     commentImage = false;
                     commentImageCount = 0;
                 } else {
-                    commentImage = comments[i].userCommentImage.saveFileName;
+                    commentImage = comments[i].reservationInfoId;
                     commentImageCount = 1;
                 }
                 var obj = {

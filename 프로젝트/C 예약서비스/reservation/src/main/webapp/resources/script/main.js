@@ -23,7 +23,7 @@ function getItems(categoryId, start) {
 			if (i % 2 != 0) {
 				rightTemplate = itemTemplate.replace('{id}', itemList[i].displayInfoId)
 							    .replace('{productContent}', itemList[i].productContent)
-							    .replace('{productImageUrl}', itemList[i].productImageUrl)
+							    .replace('{displayInfoId}', itemList[i].displayInfoId)
 							    .replace('{placeName}', itemList[i].placeName)
 							    .replace('{productDescription}', itemList[i].productDescription)
 							    .replace('{productDescription}', itemList[i].productDescription);
@@ -31,7 +31,7 @@ function getItems(categoryId, start) {
 			} else {
 				leftTemplate = itemTemplate.replace('{id}', itemList[i].displayInfoId)
 							   .replace('{productContent}', itemList[i].productContent)
-							   .replace('{productImageUrl}', itemList[i].productImageUrl)
+							   .replace('{displayInfoId}', itemList[i].displayInfoId)
 							   .replace('{placeName}', itemList[i].placeName)
 							   .replace('{productDescription}', itemList[i].productDescription)
 							   .replace('{productDescription}', itemList[i].productDescription);
@@ -105,7 +105,7 @@ function showSlides() {
 		var template = '';
 		for (var i = 0, len = promotionItems.length; i < len; i++) {
 			template = promotionTemplate.replace('{id}', promotionItems[i].id)
-						    .replace('{productImageUrl}', promotionItems[i].productImageUrl);
+						    .replace('{productId}', promotionItems[i].productId);
 			ul.innerHTML += template;
 		}
 		slideAnimate(promotionItems.length);

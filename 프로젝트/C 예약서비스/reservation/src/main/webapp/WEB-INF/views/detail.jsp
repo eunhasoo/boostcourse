@@ -186,7 +186,7 @@
     
     <script id="store-info" type="rv-template">
 		<a href="#" class="store_location" title="지도웹으로 연결">
-            <img class="store_map img_thumb" alt="map" src="resources/{saveFileName}">
+            <img class="store_map img_thumb" alt="map" src="/reservation/api/mapimage/{displayInfoId}">
             <span class="img_border"></span>
             <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
         </a>
@@ -221,7 +221,7 @@
 				{{#if commentImage}}
 		        	<div class="review_area">
 		            	<div class="thumb_area">
-		                	<a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="resources/{{commentImage}}" alt="리뷰이미지"> </a> <span class="img_count" style="display:none;">{{commentImageCount}}</span>
+		                	<a href="#" class="thumb" title="이미지 크게 보기"> <img width="90" height="90" class="img_vertical_top" src="/reservation/api/reviewimage/{{commentImage}}" alt="리뷰이미지"> </a> <span class="img_count">{{commentImageCount}}</span>
 						</div>
 				{{else}}
 		        	<div class="review_area no_img">
@@ -237,10 +237,10 @@
     </script>
     
     <script id="image-list" type="rv-template">
-		<li class="item" style="width: 414px;"> <img alt="{fileName}" class="img_thumb" src="resources/{saveFileName}"> <span class="img_bg"></span>
+		<li class="item" style="width: 414px;"> <img alt="상품이미지" class="img_thumb" src="/reservation/api/detailimage/{{displayInfoId}}"> <span class="img_bg"></span>
         	  <div class="visual_txt">
         	       <div class="visual_txt_inn">
-        	            <h2 class="visual_txt_tit"> <span>{productDescription}</span> </h2>
+        	            <h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
         	                   <p class="visual_txt_dsc"></p>
          	      </div>
        	  	  </div>

@@ -41,6 +41,7 @@ var app = {
 	},
 	setProductImage() {
 		var images = this.res.productImage;
+		console.log(this.res.productImage);
 		if (images.length == 1) {
 			this.hideBtn();
 		}
@@ -49,9 +50,8 @@ var app = {
 		var template = document.querySelector('#image-list').innerHTML;
 		var html = '';
 		for (var i = 0; i < images.length; i++) {
-			html += template.replace('{fileName}', images[i].fileName)
-							.replace('{saveFileName}', images[i].saveFileName)
-							.replace('{productDescription}', this.res.displayInfo.productDescription);
+			html += template.replace('{{displayInfoId}}', this.res.displayInfo.displayInfoId)
+							.replace('{{productDescription}}', this.res.displayInfo.productDescription);
 		}
 		ul.innerHTML = html;
 	},
@@ -59,8 +59,8 @@ var app = {
 		document.querySelector('.figure_pagination > span.num.off > span').innerText = length;
 	},
 	hideBtn() {
-		$('.group_visual .prev').css('display', 'none');
-		$('.group_visual .nxt').css('display', 'none');
+	    $('.group_visual .prev').remove();
+	    $('.group_visual .nxt').remove();
 	},
 	setProductContent() {
 		var content = this.res.displayInfo.productContent;
@@ -172,7 +172,7 @@ var app = {
 				commentImage = false;
 				commentImageCount = 0;
 			} else {
-				commentImage = comments[i].userCommentImage.saveFileName;
+				commentImage = comments[i].reservationInfoId;
 				commentImageCount = 1;
 			}
 			var obj = {
@@ -229,8 +229,8 @@ var app = {
 	setStoreInfo() {
 		var template = document.querySelector('#store-info').innerHTML;
 		var div = document.querySelector('.detail_location .box_store_info');
-		div.innerHTML = template.replace('{productDescription}', this.res.displayInfo.productDescription)
-								.replace('{saveFileName}', this.res.displayInfoImage.saveFileName)
+		div.innerHTML = template.replace('{displayInfoId}', parseInt(this.res.displayInfo.displayInfoId))
+						        .replace('{productDescription}', this.res.displayInfo.productDescription)
 								.replace('{placeLot}', this.res.displayInfo.placeLot)
 								.replace('{placeStreet}', this.res.displayInfo.placeStreet)
 								.replace('{placeName}', this.res.displayInfo.placeName)

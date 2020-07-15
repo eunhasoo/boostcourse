@@ -23,6 +23,7 @@ var reserveApp = {
       req.open('GET', '/reservation/api/products/' + urlParams.get('id'));
       req.onload = function() {
           const jsonRes = JSON.parse(req.response);
+          console.log(jsonRes);
           window.reserveApp.setRes(jsonRes.displayInfoResponse);
           window.reserveApp.setTopArea();
           window.reserveApp.setMidArea();
@@ -44,7 +45,8 @@ var reserveApp = {
     },
     makeImage() {
       var item = document.querySelector('.group_visual .visual_img .item');
-      item.firstElementChild.src = 'resources/' + this.res.productImage[0].saveFileName;
+      item.firstElementChild.src = '/reservation/api/reserveimage/' + this.res.displayInfo.displayInfoId;
+      item.style.transition = '';
       item.style.transform = 'translate(0px)';
       document.querySelector('.preview_txt_dsc').innerText = this.res.displayInfo.openingHours;
     },
@@ -98,7 +100,8 @@ var reserveApp = {
           e.target.nextElementSibling.value = parseInt(e.target.nextElementSibling.value) - 1;
           if (e.target.nextElementSibling.value === "0") {
             e.target.classList.add('disabled');
-          }
+            e.target.nextElementSibling.classList.add('disabled');
+          } 
           
           // 총 금액 관리
           var money = e.target.parentElement.parentElement.parentElement.children[1].children[1]
@@ -124,6 +127,7 @@ var reserveApp = {
             e.target.previousElementSibling.value = parseInt(e.target.previousElementSibling.value) + 1;
             if (e.target.previousElementSibling.value >= "1") {
               e.target.previousElementSibling.previousElementSibling.classList.remove('disabled');
+              e.target.previousElementSibling.classList.remove('disabled');
             }
             if (e.target.previousElementSibling.value == "99") {
               e.target.classList.add('disabled');
