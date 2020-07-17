@@ -23,7 +23,6 @@ var reserveApp = {
       req.open('GET', '/reservation/api/products/' + urlParams.get('id'));
       req.onload = function() {
           const jsonRes = JSON.parse(req.response);
-          console.log(jsonRes);
           window.reserveApp.setRes(jsonRes.displayInfoResponse);
           window.reserveApp.setTopArea();
           window.reserveApp.setMidArea();
@@ -45,7 +44,7 @@ var reserveApp = {
     },
     makeImage() {
       var item = document.querySelector('.group_visual .visual_img .item');
-      item.firstElementChild.src = '/reservation/api/reserveimage/' + this.res.displayInfo.displayInfoId;
+      item.firstElementChild.src = '/reservation/api/image/' + this.res.productImage[0].type + '/' + this.res.productImage[0].productId;
       item.style.transition = '';
       item.style.transform = 'translate(0px)';
       document.querySelector('.preview_txt_dsc').innerText = this.res.displayInfo.openingHours;

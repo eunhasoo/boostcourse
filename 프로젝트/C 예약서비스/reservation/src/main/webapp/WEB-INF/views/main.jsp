@@ -114,7 +114,7 @@
 
 
     <script type="rv-template" id="promotionItem">
-    <li class="item" data-index={id} style="background-image: url(/reservation/api/thumbimage/{productId});">
+    <li class="item" data-index={id} style="background-image: url(/reservation/api/image/th/{productId});">
         <a href="#"> <span class="img_btm_border"></span> <span class="img_right_border"></span> <span class="img_bg_gra"></span>
             <div class="event_txt">
                 <h4 class="event_txt_tit"></h4>
@@ -129,7 +129,7 @@
         <li class="item">
             <a href="detail?id={id}" class="item_book">
                 <div class="item_preview">
-                    <img alt="{productDescription}" class="img_thumb" src="/reservation/api/thumbimage/{displayInfoId}">
+                    <img alt="{productDescription}" class="img_thumb" src="/reservation/api/image/th/{productId}">
                     <span class="img_border"></span>
                 </div>
                 <div class="event_txt">

@@ -41,7 +41,6 @@ var app = {
 	},
 	setProductImage() {
 		var images = this.res.productImage;
-		console.log(this.res.productImage);
 		if (images.length == 1) {
 			this.hideBtn();
 		}
@@ -50,8 +49,9 @@ var app = {
 		var template = document.querySelector('#image-list').innerHTML;
 		var html = '';
 		for (var i = 0; i < images.length; i++) {
-			html += template.replace('{{displayInfoId}}', this.res.displayInfo.displayInfoId)
-							.replace('{{productDescription}}', this.res.displayInfo.productDescription);
+			html += template.replace('{{productId}}', images[i].productId)
+							.replace('{{productDescription}}', this.res.displayInfo.productDescription)
+							.replace('{{filetype}}', images[i].type);
 		}
 		ul.innerHTML = html;
 	},
@@ -229,7 +229,7 @@ var app = {
 	setStoreInfo() {
 		var template = document.querySelector('#store-info').innerHTML;
 		var div = document.querySelector('.detail_location .box_store_info');
-		div.innerHTML = template.replace('{displayInfoId}', parseInt(this.res.displayInfo.displayInfoId))
+		div.innerHTML = template.replace('{productId}', parseInt(this.res.displayInfo.productId))
 						        .replace('{productDescription}', this.res.displayInfo.productDescription)
 								.replace('{placeLot}', this.res.displayInfo.placeLot)
 								.replace('{placeStreet}', this.res.displayInfo.placeStreet)

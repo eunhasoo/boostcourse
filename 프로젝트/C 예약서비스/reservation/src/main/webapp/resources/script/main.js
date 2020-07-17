@@ -23,7 +23,7 @@ function getItems(categoryId, start) {
 			if (i % 2 != 0) {
 				rightTemplate = itemTemplate.replace('{id}', itemList[i].displayInfoId)
 							    .replace('{productContent}', itemList[i].productContent)
-							    .replace('{displayInfoId}', itemList[i].displayInfoId)
+							    .replace('{productId}', itemList[i].productId)
 							    .replace('{placeName}', itemList[i].placeName)
 							    .replace('{productDescription}', itemList[i].productDescription)
 							    .replace('{productDescription}', itemList[i].productDescription);
@@ -31,7 +31,7 @@ function getItems(categoryId, start) {
 			} else {
 				leftTemplate = itemTemplate.replace('{id}', itemList[i].displayInfoId)
 							   .replace('{productContent}', itemList[i].productContent)
-							   .replace('{displayInfoId}', itemList[i].displayInfoId)
+							   .replace('{productId}', itemList[i].productId)
 							   .replace('{placeName}', itemList[i].placeName)
 							   .replace('{productDescription}', itemList[i].productDescription)
 							   .replace('{productDescription}', itemList[i].productDescription);

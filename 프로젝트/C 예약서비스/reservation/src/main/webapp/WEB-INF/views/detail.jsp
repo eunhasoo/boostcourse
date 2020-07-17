@@ -186,7 +186,7 @@
     
     <script id="store-info" type="rv-template">
 		<a href="#" class="store_location" title="지도웹으로 연결">
-            <img class="store_map img_thumb" alt="map" src="/reservation/api/mapimage/{displayInfoId}">
+            <img class="store_map img_thumb" alt="map" src="/reservation/api/image/map/{productId}">
             <span class="img_border"></span>
             <span class="btn_map"><i class="spr_book2 ico_mapview"></i></span>
         </a>
@@ -237,7 +237,7 @@
     </script>
     
     <script id="image-list" type="rv-template">
-		<li class="item" style="width: 414px;"> <img alt="상품이미지" class="img_thumb" src="/reservation/api/detailimage/{{displayInfoId}}"> <span class="img_bg"></span>
+		<li class="item" style="width: 414px;"> <img alt="상품이미지" class="img_thumb" src="/reservation/api/image/{{filetype}}/{{productId}}"> <span class="img_bg"></span>
         	  <div class="visual_txt">
         	       <div class="visual_txt_inn">
         	            <h2 class="visual_txt_tit"> <span>{{productDescription}}</span> </h2>
