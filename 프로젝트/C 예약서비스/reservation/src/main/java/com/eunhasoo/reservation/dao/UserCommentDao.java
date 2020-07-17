@@ -28,7 +28,8 @@ public class UserCommentDao {
 		+ "i.reservation_date, i.reservation_date, i.reservation_email, "
 		+ "i.id as reservationInfoId, i.reservation_name, i.reservation_tel as reservationTelephone "
 		+ "from reservation_user_comment r " + "inner join reservation_info i on r.reservation_info_id = i.id "
-		+ "where i.display_info_id = :displayInfoId";
+		+ "where i.display_info_id = :displayInfoId "
+		+ "order by r.id desc";
 
 	private final String SELECT_SCORE 
 	= "select avg(score) as averageScore " + "from reservation_user_comment c "
