@@ -1,7 +1,7 @@
-var reviewWriteApp = {
+const reviewWriteApp = function() {}
+reviewWriteApp.prototype = {
     init: function() {
       this.showTitle();
-      this.controlScore();
       this.startWriting();
       this.watchCharCount();
       this.manageFile();
@@ -10,27 +10,6 @@ var reviewWriteApp = {
     showTitle: function() {
       const title = decodeURIComponent(window.location.href.split('tit=')[1]);
       document.querySelector('.ct .top_title.review_header .title').innerText = title;
-    },
-    controlScore: function() {
-      const ratingPoint = document.querySelector('.review_rating.rating_point');
-      ratingPoint.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (e.target.type !== 'checkbox') {
-          return;
-        }
-        const stars = document.querySelector('.review_rating.rating_point .rating').children;
-        const value = parseInt(e.target.value);
-        for (var i = 2; i <= 6; i++) {
-          if (i <= value + 1) {
-            stars['rating' + i].classList.add('checked');
-          } else {
-            stars['rating' + i].classList.remove('checked');
-          }
-        }
-        const rank = document.querySelector('.review_rating.rating_point .star_rank')
-        rank.classList.remove('gray_star');
-        rank.innerText = value;
-      })
     },
     startWriting: function() {
       document.querySelector('.ct .review_contents .review_write_info').addEventListener('click', () => {
@@ -45,16 +24,28 @@ var reviewWriteApp = {
       });
     },
     manageFile: function() {
+      this.checkFileExtension();
+      this.removeFile();
+    },
+    checkFileExtension: function() {
       document.querySelector('#reviewImageFileOpenInput').addEventListener('change', function(e) {
         const image = e.target.files[0];
         const checker = (['image/jpeg', 'image/png', 'image/jpg'].indexOf(image.type) > -1);
         if (!checker) {
           alert('파일 확장자가 png/jpeg/jpg 중 하나인지 다시 한 번 확인해주세요.');
+          e.target.value = '';
           return;
         }
         const thumb = document.querySelector('.review_photos .item_thumb');
         thumb.src = window.URL.createObjectURL(image);
         thumb.parentElement.style.display = 'inline-block';
+      });
+    },
+    removeFile: function() {
+      document.querySelector('.review_photos .spr_book.ico_del').addEventListener('click', function(e) {
+        document.querySelector('#reviewImageFileOpenInput').value = '';
+        document.querySelector('.review_photos .item').style.display = 'none';
+        document.querySelector('.review_photos .item_thumb').src = '';
       });
     },
     checkAllDone: function() {
@@ -112,6 +103,32 @@ var reviewWriteApp = {
     }
 }
 
+const starComponent = function() {}
+starComponent.prototype = {
+    controlScore: function() {
+      const ratingPoint = document.querySelector('.review_rating.rating_point');
+      ratingPoint.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (e.target.type !== 'checkbox') {
+          return;
+        }
+        const stars = document.querySelector('.review_rating.rating_point .rating').children;
+        const value = parseInt(e.target.value);
+        for (var i = 2; i <= 6; i++) {
+          if (i <= value + 1) {
+            stars['rating' + i].classList.add('checked');
+          } else {
+            stars['rating' + i].classList.remove('checked');
+          }
+        }
+        const rank = document.querySelector('.review_rating.rating_point .star_rank')
+        rank.classList.remove('gray_star');
+        rank.innerText = value;
+      })
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-  reviewWriteApp.init();
+  new reviewWriteApp().init();
+  new starComponent().controlScore();
 })
