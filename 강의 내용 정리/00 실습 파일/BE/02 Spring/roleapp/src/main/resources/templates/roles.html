@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>roles</title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+
+<body>
+<h1>Roles</h1>
+
+<div id="roles">
+	<div class="role" th:each="role : ${roles}">
+	<div class="roleId" th:text="${role.roleId}"></div>
+	<div class="roleId" th:text="${role.description}"></div>
+	</div>
+</div>
+
+</body>
+</html>

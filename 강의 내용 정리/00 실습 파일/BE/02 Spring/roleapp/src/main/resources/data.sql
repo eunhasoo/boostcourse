@@ -1,0 +1,3 @@
+INSERT INTO ROLE VALUES (100, 'Developer');
+INSERT INTO ROLE VALUES (101, 'Researcher');
+INSERT INTO ROLE VALUES (102, 'Project manager');
